@@ -1,300 +1,259 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Café Vagar · Fique mais um pouco (site demonstrativo)</title>
-  <meta name="description" content="Café Vagar, cafeteria de bairro fictícia em Florianópolis. Site demonstrativo com roteiro cinematográfico em cinco atos.">
-  <meta name="robots" content="noindex">
-  <meta property="og:title" content="Café Vagar · site demonstrativo">
-  <meta property="og:description" content="O tempo passa. O café fica. Projeto conceitual, empresa fictícia.">
-  <meta property="og:image" content="assets/img/poster-chegada-largo.jpg">
-  <meta name="theme-color" content="#28271F">
-  <link rel="icon" href="assets/icone/icone.svg" type="image/svg+xml">
-  <link rel="icon" href="assets/icone/favicon-32.png" type="image/png" sizes="32x32">
-  <link rel="apple-touch-icon" href="assets/icone/apple-touch-icon.png">
-  <link rel="preload" href="assets/fontes/cormorant.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/img/rua-largo.webp" as="image" media="(min-aspect-ratio: 4/5)" fetchpriority="high">
-  <link rel="preload" href="assets/img/rua-alto.webp" as="image" media="(max-aspect-ratio: 4/5)" fetchpriority="high">
-  <link rel="stylesheet" href="estilo.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Café Vagar · Fique mais um pouco (site demonstrativo)</title>
+<meta name="description" content="Café Vagar, uma cafeteria de bairro para ficar sem pressa. Site demonstrativo de Letícia Beatriz.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#15110E">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Café Vagar · Fique mais um pouco">
+<meta property="og:description" content="Uma cafeteria de bairro contada como um curta-metragem. Site demonstrativo de Letícia Beatriz.">
+<meta property="og:image" content="https://cafevagar.pages.dev/assets/img/compartilhar.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Rua de paralelepípedos ao entardecer com a vitrine acesa de uma pequena cafeteria verde.">
+<link rel="icon" href="assets/icone/icone.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icone/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/icone/apple-touch-icon.png">
+<link rel="preload" href="assets/fontes/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fontes/instrument-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="assets/img/chegada-salao-alto-754.webp" imagesrcset="assets/img/chegada-salao-alto-540.webp 540w, assets/img/chegada-salao-alto-754.webp 754w" imagesizes="max(100vw, 57vh)" media="(prefers-reduced-motion: reduce) and (max-aspect-ratio: 1/1)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/chegada-salao-1600.webp" imagesrcset="assets/img/chegada-salao-960.webp 960w, assets/img/chegada-salao-1600.webp 1600w, assets/img/chegada-salao-2400.webp 2400w" imagesizes="max(100vw, 180vh)" media="(prefers-reduced-motion: reduce) and (min-aspect-ratio: 1001/1000)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/chegada-cena-alto-754.webp" imagesrcset="assets/img/chegada-cena-alto-540.webp 540w, assets/img/chegada-cena-alto-754.webp 754w" imagesizes="max(100vw, 57vh)" media="(prefers-reduced-motion: no-preference) and (max-aspect-ratio: 1/1)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/chegada-cena-1600.webp" imagesrcset="assets/img/chegada-cena-960.webp 960w, assets/img/chegada-cena-1600.webp 1600w, assets/img/chegada-cena-2400.webp 2400w" imagesizes="max(100vw, 180vh)" media="(prefers-reduced-motion: no-preference) and (min-aspect-ratio: 1001/1000)" fetchpriority="high">
+<link rel="stylesheet" href="estilo.css">
+<script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
-  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
-  <div class="grao" aria-hidden="true"></div>
+<a class="pular" href="#sem-relogio">Pular para o conteúdo</a>
 
-  <header class="topo">
-    <a class="marca" href="#chegada">Café Vagar</a>
-    <nav aria-label="Seções">
-      <ul>
-        <li><a href="#lugar">O lugar</a></li>
-        <li><a href="#cardapio">Cardápio</a></li>
-        <li><a href="#visite">Visite</a></li>
+<header class="topo" id="cabecalho">
+  <a class="logo" href="#topo" aria-label="Café Vagar, voltar ao início"><span aria-hidden="true">Café Vagar</span></a>
+  <nav aria-label="Principal">
+    <ul>
+      <li><a href="#o-lugar">O lugar</a></li>
+      <li><a href="#cardapio">Cardápio</a></li>
+      <li><a href="#visite">Visite</a></li>
+    </ul>
+  </nav>
+  <a class="botao botao--pequeno so-largo" href="https://www.google.com/maps/search/?api=1&amp;query=Rua+das+Flores+128+Florian%C3%B3polis" target="_blank" rel="noopener">Como chegar<span class="oculto"> (abre em nova aba)</span></a>
+</header>
+
+<main>
+  <!-- 1. A chegada -->
+  <section class="chegada" id="topo" aria-labelledby="titulo-chegada">
+    <div class="chegada-palco">
+      <div class="chegada-camadas" aria-hidden="true">
+        <div class="cena"></div>
+        <picture><source media="(max-aspect-ratio: 1/1)" srcset="assets/img/chegada-salao-alto-540.webp 540w, assets/img/chegada-salao-alto-754.webp 754w" sizes="max(100vw, 57vh)"><img class="salao" src="assets/img/chegada-salao-1600.webp" srcset="assets/img/chegada-salao-960.webp 960w, assets/img/chegada-salao-1600.webp 1600w, assets/img/chegada-salao-2400.webp 2400w" sizes="max(100vw, 180vh)" width="2400" height="1340" alt="" decoding="async"></picture>
+        <div class="tarja tarja--cima"></div>
+        <div class="tarja tarja--baixo"></div>
+      </div>
+
+      <template id="modelo-cena">
+          <picture><source media="(max-aspect-ratio: 1/1)" srcset="assets/img/chegada-cena-alto-540.webp 540w, assets/img/chegada-cena-alto-754.webp 754w" sizes="max(100vw, 57vh)"><img class="cena-fundo" src="assets/img/chegada-cena-1600.webp" srcset="assets/img/chegada-cena-960.webp 960w, assets/img/chegada-cena-1600.webp 1600w, assets/img/chegada-cena-2400.webp 2400w" sizes="max(100vw, 180vh)" width="2400" height="1340" alt="" fetchpriority="high" decoding="async"></picture>
+          <picture><source media="(max-aspect-ratio: 1/1)" srcset="assets/img/chegada-fachada-alto-540.webp 540w, assets/img/chegada-fachada-alto-754.webp 754w" sizes="max(100vw, 57vh)"><img class="cena-fachada" src="assets/img/chegada-fachada-1600.webp" srcset="assets/img/chegada-fachada-960.webp 960w, assets/img/chegada-fachada-1600.webp 1600w, assets/img/chegada-fachada-2400.webp 2400w" sizes="max(100vw, 180vh)" width="2400" height="1340" alt="" decoding="async"></picture>
+      </template>
+      <p class="creditos"><span>Café Vagar apresenta</span><span>uma pausa ao fim da tarde</span></p>
+      <h1 id="titulo-chegada" class="chegada-titulo">
+        <span class="linha">O tempo passa.</span>
+        <em class="linha">O café fica.</em>
+      </h1>
+      <p class="dica" aria-hidden="true">role para entrar</p>
+      <div class="chegada-fim painel">
+        <p class="chegada-fim-texto">Entre sem pressa.</p>
+        <a class="botao" href="https://www.google.com/maps/search/?api=1&amp;query=Rua+das+Flores+128+Florian%C3%B3polis" target="_blank" rel="noopener">Como chegar<span class="oculto"> (abre em nova aba)</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Sem relógio -->
+  <section class="sem-relogio secao" id="sem-relogio" tabindex="-1" aria-labelledby="titulo-sem-relogio">
+    <div class="sem-relogio-grade">
+      <div class="sem-relogio-texto">
+        <h2 id="titulo-sem-relogio">Há <span data-ancora="2">dias</span> que pedem <span data-ancora="3">pressa</span>. <em>Outros pedem <span data-ancora="1">café</span>.</em></h2>
+        <p>Não é só sobre tomar um café. É sobre encontrar um lugar onde você não precisa olhar para o relógio.</p>
+      </div>
+      <ul class="notas">
+        <li data-nota="1">O grão é moído na hora do pedido, nunca antes.</li>
+        <li data-nota="2">A mesa grande do fundo cabe oito.</li>
+        <li data-nota="3">Tem wi-fi, mas quase ninguém lembra de pedir a senha.</li>
       </ul>
-    </nav>
-  </header>
+    </div>
+    <svg class="fios" aria-hidden="true" focusable="false"></svg>
+  </section>
 
-  <main id="conteudo">
-
-    <!-- ATO I: a chegada. A rolagem leva a pessoa da calçada para dentro da cafeteria. -->
-    <section class="ato1" id="chegada" aria-labelledby="t-chegada">
-      <div class="palco">
-        <div class="plano plano--rua" aria-hidden="true">
-          <picture><source media="(max-aspect-ratio: 4/5)" srcset="assets/img/rua-alto.webp" width="1080" height="1920"><img class="rua" src="assets/img/rua-largo.webp" width="3400" height="1913" alt="" fetchpriority="high"></picture>
+  <!-- 3. O lugar -->
+  <section class="lugar" id="o-lugar" aria-labelledby="titulo-lugar">
+    <div class="lugar-trilha">
+      <div class="lugar-palco">
+        <div class="lugar-faixa">
+        <h2 id="titulo-lugar" class="lugar-intro">Três jeitos de ficar.</h2>
+        <ol class="lugar-lista">
+          <li>
+            <figure>
+              <img src="assets/img/lugar-silencio-896.webp" srcset="assets/img/lugar-silencio-600.webp 600w, assets/img/lugar-silencio-896.webp 896w" sizes="(max-width: 767px) 92vw, 460px" width="896" height="1200" loading="lazy" decoding="async" alt="Mesa de madeira junto à janela, com uma xícara e um livro aberto, na luz do fim da tarde.">
+              <figcaption><h3>O silêncio</h3><p>As mesas da janela são de quem chega sozinho.</p></figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure>
+              <img src="assets/img/lugar-conversa-896.webp" srcset="assets/img/lugar-conversa-600.webp 600w, assets/img/lugar-conversa-896.webp 896w" sizes="(max-width: 767px) 92vw, 460px" width="896" height="1200" loading="lazy" decoding="async" alt="Mesa comprida no fundo do salão, com cadeiras diferentes e xícaras espalhadas.">
+              <figcaption><h3>A conversa</h3><p>A mesa do fundo costuma terminar a tarde com mais gente do que começou.</p></figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure>
+              <img src="assets/img/lugar-balcao-896.webp" srcset="assets/img/lugar-balcao-600.webp 600w, assets/img/lugar-balcao-896.webp 896w" sizes="(max-width: 767px) 92vw, 460px" width="896" height="1200" loading="lazy" decoding="async" alt="Balcão de madeira com a máquina de espresso e as mãos de quem prepara o café.">
+              <figcaption><h3>O balcão</h3><p>Do balcão dá para acompanhar o café sendo feito.</p></figcaption>
+            </figure>
+          </li>
+        </ol>
         </div>
-        <div class="plano plano--dentro" aria-hidden="true">
-          <picture><source media="(max-aspect-ratio: 4/5)" srcset="assets/img/poster-chegada-alto.jpg" width="720" height="1280"><img class="filme-fundo" src="assets/img/poster-chegada-largo.jpg" width="1600" height="900" alt="" decoding="async"></picture>
-        </div>
-        <div class="vidro" aria-hidden="true"></div>
-        <div class="vinheta" aria-hidden="true"></div>
-        <div class="tarja tarja--cima" aria-hidden="true"></div>
-        <div class="tarja tarja--baixo" aria-hidden="true"></div>
-        <div class="luz" aria-hidden="true"></div>
-
-        <div class="falas">
-          <div class="fala fala--credito" data-de="0" data-ate="0.13">
-            <p class="credito">Café Vagar apresenta</p>
-          </div>
-          <div class="fala fala--credito" data-de="0.15" data-ate="0.29">
-            <p class="credito">uma pausa em cinco atos<br><span>Rua das Flores, 128, Florianópolis</span></p>
-          </div>
-          <div class="fala" data-de="0.5" data-ate="0.68">
-            <h1 id="t-chegada">O tempo passa.<br>O café fica.</h1>
-          </div>
-          <div class="fala" data-de="0.7" data-ate="0.88">
-            <p class="frase">Há dias que pedem pressa.<br>Outros pedem café.</p>
-            <p><a class="botao" href="#lugar">Entre sem pressa</a></p>
-          </div>
-          <div class="fala fala--janela" data-de="0.93" data-ate="1.01" aria-hidden="true">
-            <p class="frase frase--janela">Não é só sobre tomar um café. É sobre encontrar um lugar onde você não precisa olhar para o relógio.</p>
-          </div>
-        </div>
-        <p class="dica-rolar" aria-hidden="true">role para entrar</p>
+        <div class="regua" aria-hidden="true"><span class="regua-linha"></span><i></i><i></i><i></i></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ATO II: o lugar -->
-    <section class="ato2" id="lugar" aria-labelledby="t-lugar">
-      <div class="janela">
-        <img class="paralaxe" data-v="0.18" src="assets/img/luz-janela.webp" width="2000" height="1329" alt="" loading="lazy" decoding="async">
-        <div class="janela-texto">
-                    <h2 id="t-lugar" class="revela">Não é só sobre tomar um café. É sobre encontrar um lugar onde você não precisa olhar para o relógio.</h2>
+  <!-- 4. O ritual -->
+  <section class="ritual" id="ritual" aria-labelledby="titulo-ritual">
+    <h2 id="titulo-ritual" class="oculto">O ritual</h2>
+    <ol class="oculto">
+      <li>00:00. O espresso descansa na xícara.</li>
+      <li>00:20. O leite entra devagar, rente à borda.</li>
+      <li>00:45. Pronto. Agora é com você.</li>
+    </ol>
+    <div class="ritual-trilha">
+      <div class="ritual-palco" aria-hidden="true">
+        <div class="ritual-quadro">
+          <div class="ritual-fotos">
+            <img src="assets/img/ritual-1-1600.webp" srcset="assets/img/ritual-1-960.webp 960w, assets/img/ritual-1-1600.webp 1600w, assets/img/ritual-1-2400.webp 2400w" sizes="100vw" width="2400" height="1792" loading="lazy" decoding="async" alt="">
+            <img src="assets/img/ritual-2-1600.webp" srcset="assets/img/ritual-2-960.webp 960w, assets/img/ritual-2-1600.webp 1600w, assets/img/ritual-2-2400.webp 2400w" sizes="100vw" width="2400" height="1792" loading="lazy" decoding="async" alt="">
+            <img src="assets/img/ritual-3-1600.webp" srcset="assets/img/ritual-3-960.webp 960w, assets/img/ritual-3-1600.webp 1600w, assets/img/ritual-3-2400.webp 2400w" sizes="100vw" width="2400" height="1792" loading="lazy" decoding="async" alt="">
+          </div>
         </div>
-      </div>
-
-      <div class="rolo">
-        <section class="rolo-palco" aria-label="Três momentos no Café Vagar" tabindex="0">
-          <ol class="tira">
-            <li class="fotograma">
-              <img src="assets/img/silencio.webp" width="900" height="1125" loading="lazy" decoding="async"
-                   alt="Mulher lendo um livro numa mesa de madeira perto da janela, com um copo de café ao lado.">
-              <div class="fotograma-texto">
-                <h3>O silêncio</h3>
-                <p>As mesas da janela são de quem chega sozinho. Tem wi-fi, mas quase ninguém lembra de pedir a senha.</p>
-              </div>
-            </li>
-            <li class="fotograma">
-              <img src="assets/img/conversa.webp" width="900" height="1125" loading="lazy" decoding="async"
-                   alt="Duas pessoas passando uma xícara de café com leite de mão em mão.">
-              <div class="fotograma-texto">
-                <h3>A conversa</h3>
-                <p>A mesa grande do fundo cabe oito. Costuma terminar a tarde com mais gente do que começou.</p>
-              </div>
-            </li>
-            <li class="fotograma">
-              <img src="assets/img/ritual.webp" width="900" height="1125" loading="lazy" decoding="async"
-                   alt="Barista servindo leite vaporizado numa xícara, ao lado da máquina de espresso.">
-              <div class="fotograma-texto">
-                <h3>O ritual</h3>
-                <p>O grão é moído na hora do pedido, nunca antes. Do balcão dá para acompanhar tudo.</p>
-              </div>
-            </li>
-          </ol>
-        </section>
-      </div>
-    </section>
-
-    <!-- ATO III: o ritual, cena de rolagem -->
-    <section class="ato3" id="ritual" aria-labelledby="t-ritual">
-      <div class="palco palco--ritual">
-        <div class="quadro-ritual">
-          <canvas class="tela-ritual" aria-hidden="true"></canvas>
+        <div class="ritual-painel painel">
+          <p class="ritual-tempo">00:00</p>
+          <p class="ritual-frase">O espresso descansa na xícara.</p>
         </div>
-        <div class="ritual-texto">
-                    <h2 id="t-ritual" class="sr">O ritual</h2>
-          <ol class="tempos">
-            <li data-de="0" data-ate="0.34"><span class="tempo-num">00:00</span>O espresso descansa na xícara.</li>
-            <li data-de="0.34" data-ate="0.68"><span class="tempo-num">00:20</span>O leite entra devagar, rente à borda.</li>
-            <li data-de="0.68" data-ate="1.01"><span class="tempo-num">00:45</span>Pronto. Agora é com você.</li>
-          </ol>
-        </div>
+        <p class="ritual-legenda">Flat white, 00:45</p>
       </div>
-    </section>
-
-    <!-- Cardápio editorial -->
-    <section class="cardapio" id="cardapio" aria-labelledby="t-cardapio">
-      <div class="cardapio-topo revela">
-                <h2 id="t-cardapio">Poucas coisas, feitas com tempo.</h2>
-        <p class="nota">Cardápio e preços fictícios, criados para esta demonstração.</p>
-      </div>
-
-      <ol class="pratos">
-        <li class="prato prato--grande">
-          <figure class="revela-img"><img src="assets/img/espresso.webp" width="900" height="1125" loading="lazy" decoding="async" alt="Espresso num copo de vidro sobre pires, em mesa de madeira escura."></figure>
-          <div class="prato-texto revela">
-            <span class="num" aria-hidden="true">01</span>
-            <h3>Espresso da Casa</h3>
-            <p>Café especial, notas de chocolate amargo e caramelo.</p>
-            <p class="preco">R$ 9</p>
-          </div>
-        </li>
-        <li class="prato prato--direita">
-          <figure class="revela-img"><img src="assets/img/flat-white.webp" width="900" height="1125" loading="lazy" decoding="async" alt="Caneca escura com flat white e desenho de folha na espuma, sob luz de fim de tarde."></figure>
-          <div class="prato-texto revela">
-            <span class="num" aria-hidden="true">02</span>
-            <h3>Flat White</h3>
-            <p>Duplo espresso com leite texturizado.</p>
-            <p class="preco">R$ 15</p>
-          </div>
-        </li>
-        <li class="prato">
-          <figure class="revela-img"><img src="assets/img/cold-brew.webp" width="900" height="1125" loading="lazy" decoding="async" alt="Dois copos de vidro de parede dupla com café gelado."></figure>
-          <div class="prato-texto revela">
-            <span class="num" aria-hidden="true">03</span>
-            <h3>Cold Brew</h3>
-            <p>Extração lenta, notas cítricas e finalização suave.</p>
-            <p class="preco">R$ 16</p>
-          </div>
-        </li>
-        <li class="prato prato--direita">
-          <figure class="revela-img"><img src="assets/img/croissant.webp" width="900" height="1125" loading="lazy" decoding="async" alt="Croissants dourados ao lado de uma xícara de espresso."></figure>
-          <div class="prato-texto revela">
-            <span class="num" aria-hidden="true">04</span>
-            <h3>Croissant de Manteiga</h3>
-            <p>Folhado, dourado e feito para acompanhar um espresso.</p>
-            <p class="preco">R$ 13</p>
-          </div>
-        </li>
-        <li class="prato prato--grande">
-          <figure class="revela-img"><img src="assets/img/bolo.webp" width="900" height="1125" loading="lazy" decoding="async" alt="Fatia alta de bolo de chocolate sobre tábua de madeira, com raspas de chocolate."></figure>
-          <div class="prato-texto revela">
-            <span class="num" aria-hidden="true">05</span>
-            <h3>Bolo de Cacau</h3>
-            <p>Massa úmida com ganache meio amarga.</p>
-            <p class="preco">R$ 17</p>
-          </div>
-        </li>
+      <ol class="ritual-parado" aria-hidden="true">
+        <li><img src="assets/img/ritual-1-960.webp" width="960" height="717" loading="lazy" decoding="async" alt=""><p><span class="tempo">00:00</span> O espresso descansa na xícara.</p></li>
+        <li><img src="assets/img/ritual-2-960.webp" width="960" height="717" loading="lazy" decoding="async" alt=""><p><span class="tempo">00:20</span> O leite entra devagar, rente à borda.</p></li>
+        <li><img src="assets/img/ritual-3-960.webp" width="960" height="717" loading="lazy" decoding="async" alt=""><p><span class="tempo">00:45</span> Pronto. Agora é com você.</p></li>
       </ol>
-    </section>
+    </div>
+  </section>
 
-    <!-- ATO IV: as pessoas -->
-    <section class="ato4" id="pessoas" aria-labelledby="t-pessoas">
-      <div class="pessoas-faixa">
-        <img class="paralaxe" data-v="0.14" src="assets/img/maos.webp" width="1600" height="1067" loading="lazy" decoding="async"
-             alt="Mãos segurando uma xícara verde-clara com café e desenho de folha na espuma.">
-      </div>
-      <div class="pessoas-conteudo">
-        <div class="pessoas-titulo revela">
-                    <h2 id="t-pessoas">Quem fica mais um pouco.</h2>
-        </div>
-        <figure class="citacao revela">
+  <!-- 5. Cardápio -->
+  <section class="cardapio secao" id="cardapio" aria-labelledby="titulo-cardapio">
+    <div class="cardapio-miolo">
+      <h2 id="titulo-cardapio">Poucas coisas, feitas com tempo.</h2>
+      <p class="aviso">Cardápio e preços fictícios, criados para esta demonstração.</p>
+      <ul class="itens">
+        <li class="item" data-foto="assets/img/item-espresso-600.webp">
+          <img class="item-mini" src="assets/img/item-espresso-144.webp" width="144" height="193" loading="lazy" decoding="async" alt="">
+          <div class="item-texto"><h3 class="item-nome">Espresso da casa</h3><p>Café especial, notas de chocolate amargo e caramelo.</p></div>
+          <p class="item-preco">R$ 9</p>
+        </li>
+        <li class="item" data-foto="assets/img/item-flat-white-600.webp">
+          <img class="item-mini" src="assets/img/item-flat-white-144.webp" width="144" height="193" loading="lazy" decoding="async" alt="">
+          <div class="item-texto"><h3 class="item-nome">Flat white</h3><p>Espresso duplo com leite vaporizado.</p></div>
+          <p class="item-preco">R$ 15</p>
+        </li>
+        <li class="item" data-foto="assets/img/item-cold-brew-600.webp">
+          <img class="item-mini" src="assets/img/item-cold-brew-144.webp" width="144" height="193" loading="lazy" decoding="async" alt="">
+          <div class="item-texto"><h3 class="item-nome">Cold brew</h3><p>Extração a frio por 16 horas, notas cítricas.</p></div>
+          <p class="item-preco">R$ 16</p>
+        </li>
+        <li class="item" data-foto="assets/img/item-croissant-600.webp">
+          <img class="item-mini" src="assets/img/item-croissant-144.webp" width="144" height="193" loading="lazy" decoding="async" alt="">
+          <div class="item-texto"><h3 class="item-nome">Croissant de manteiga</h3><p>Folhado, assado toda manhã.</p></div>
+          <p class="item-preco">R$ 13</p>
+        </li>
+        <li class="item" data-foto="assets/img/item-bolo-600.webp">
+          <img class="item-mini" src="assets/img/item-bolo-144.webp" width="144" height="193" loading="lazy" decoding="async" alt="">
+          <div class="item-texto"><h3 class="item-nome">Bolo de cacau</h3><p>Massa úmida com ganache meio amarga.</p></div>
+          <p class="item-preco">R$ 17</p>
+        </li>
+      </ul>
+    </div>
+    <div class="previa" aria-hidden="true"><img src="assets/img/item-espresso-600.webp" alt="" width="600" height="804" loading="lazy" decoding="async"></div>
+  </section>
+
+  <!-- 6. Quem fica -->
+  <section class="quem-fica secao" id="quem-fica" aria-labelledby="titulo-quem-fica">
+    <h2 id="titulo-quem-fica" class="secao-titulo-dentro">Quem fica mais um pouco.</h2>
+    <div class="quem-fica-grade">
+      <img src="assets/img/quem-fica-1200.webp" srcset="assets/img/quem-fica-800.webp 800w, assets/img/quem-fica-1200.webp 1200w" sizes="(max-width: 767px) 92vw, 50vw" width="1200" height="896" loading="lazy" decoding="async" alt="Duas mãos segurando uma xícara perto da janela.">
+      <div class="citacoes">
+        <figure>
           <blockquote><p>Meu escritório favorito tem cheiro de café.</p></blockquote>
           <figcaption>Ana, frequentadora das terças</figcaption>
         </figure>
-        <figure class="citacao citacao--b revela">
+        <figure>
           <blockquote><p>Vim pelo croissant. Fiquei pelo resto da tarde.</p></blockquote>
           <figcaption>Rafael, mesa da janela</figcaption>
         </figure>
-        <figure class="pessoas-foto revela-img">
-          <img class="paralaxe" data-v="0.06" src="assets/img/leitura.webp" width="900" height="1125" loading="lazy" decoding="async"
-               alt="Mulher sentada numa cadeira de madeira entre estantes de livros, com uma bebida gelada na mesa.">
-        </figure>
-        <p class="nota revela">Depoimentos fictícios, escritos como conteúdo conceitual deste projeto.</p>
+        <p class="aviso">Depoimentos fictícios, escritos para esta demonstração.</p>
       </div>
-    </section>
-
-    <!-- ATO V: o convite -->
-    <section class="ato5" id="visite" aria-labelledby="t-visite">
-      <div class="fachada">
-        <img class="paralaxe" data-v="0.12" src="assets/img/fachada.webp" width="2000" height="1333" loading="lazy" decoding="async"
-             alt="Fachada de uma cafeteria de tijolos ao entardecer, com toldo claro, vitrine iluminada e mesas na calçada.">
-      </div>
-      <div class="convite">
-                <h2 id="t-visite" class="revela">Tem lugar para mais um café.</h2>
-        <div class="convite-info revela">
-          <div>
-            <h3>Endereço</h3>
-            <p>Rua das Flores, 128<br>Centro, Florianópolis, SC</p>
-          </div>
-          <div>
-            <h3>Horários</h3>
-            <dl class="horarios">
-              <div><dt>Segunda a sexta</dt><dd>08h às 19h</dd></div>
-              <div><dt>Sábado</dt><dd>09h às 18h</dd></div>
-              <div><dt>Domingo</dt><dd>Fechado</dd></div>
-            </dl>
-          </div>
-        </div>
-        <p class="revela"><a class="botao" href="https://www.google.com/maps/search/?api=1&amp;query=Centro%2C+Florian%C3%B3polis+SC" target="_blank" rel="noopener">Ver no mapa<span class="sr"> (abre em nova aba)</span></a></p>
-        <p class="assinatura revela">Café Vagar. Fique mais um pouco.</p>
-        <p class="fim" aria-hidden="true">fim</p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="rodape" id="creditos">
-    <div class="rodape-col">
-      <p class="marca">Café Vagar</p>
-      <p>Site demonstrativo. O Café Vagar é uma marca fictícia: endereço, horários, preços, história e depoimentos foram inventados para este projeto de portfólio.</p>
-      <p>Projeto e site: Letícia Beatriz.
-        <a href="https://wa.me/5548996862073?text=Oi%2C%20Let%C3%ADcia!%20Vi%20o%20site%20demonstrativo%20do%20Caf%C3%A9%20Vagar%20e%20queria%20saber%20mais." target="_blank" rel="noopener">Quero um site assim<span class="sr"> (abre o WhatsApp em nova aba)</span></a>
-      </p>
     </div>
-    <details class="creditos">
-      <summary>Créditos de fotos e vídeos</summary>
-      <p>Todos do Pexels, sob a licença Pexels (uso livre, atribuição não obrigatória). Cores ajustadas para o projeto.</p>
-      <ul>
-        <li>Interior da cafeteria (quadro de vídeo): <a href="https://www.pexels.com/video/13092680/">Pexels, vídeo 13092680</a></li>
-        <li>Leite no café (vídeo): <a href="https://www.pexels.com/video/19389080/">Pexels, vídeo 19389080</a></li>
-        <li>Luz na janela: Dũng, <a href="https://www.pexels.com/photo/18405036/">Pexels</a></li>
-        <li>O silêncio: Orhan, <a href="https://www.pexels.com/photo/27658223/">Pexels</a></li>
-        <li>A conversa: Doğu, <a href="https://www.pexels.com/photo/14697572/">Pexels</a></li>
-        <li>O ritual: Pavel, <a href="https://www.pexels.com/photo/6612669/">Pexels</a></li>
-        <li>Espresso: Wolf, <a href="https://www.pexels.com/photo/18604200/">Pexels</a></li>
-        <li>Flat white: James Collington, <a href="https://www.pexels.com/photo/30359498/">Pexels</a></li>
-        <li>Cold brew: fuji, <a href="https://www.pexels.com/photo/38967801/">Pexels</a></li>
-        <li>Croissant: Nadin, <a href="https://www.pexels.com/photo/18787601/">Pexels</a></li>
-        <li>Bolo de cacau: Marcelo, <a href="https://www.pexels.com/photo/12951749/">Pexels</a></li>
-        <li>Mãos com xícara: RDNE, <a href="https://www.pexels.com/photo/4921026/">Pexels</a></li>
-        <li>Leitura entre estantes: kong, <a href="https://www.pexels.com/photo/12371477/">Pexels</a></li>
-        <li>Fachada: Niklas, <a href="https://www.pexels.com/photo/10623540/">Pexels</a></li>
-      </ul>
-    </details>
-  </footer>
+  </section>
 
-  <div class="acess">
-    <button class="acess-botao" type="button" aria-expanded="false" aria-controls="acess-painel">
-      <svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22"><circle cx="12" cy="4.2" r="2.2" fill="currentColor"/><path d="M4 8.2c2.6.8 5.3 1.2 8 1.2s5.4-.4 8-1.2M12 9.4v5.2m0 0-3.4 6.6m3.4-6.6 3.4 6.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      <span>Acessibilidade</span>
-    </button>
-    <section class="acess-painel" id="acess-painel" aria-label="Opções de acessibilidade" hidden>
-      <p class="acess-titulo">Ajuste a página do seu jeito</p>
-      <div class="acess-linha">
-        <span id="rot-texto">Tamanho do texto</span>
-        <div class="acess-grupo" role="group" aria-labelledby="rot-texto">
-          <button type="button" data-acao="menor" aria-label="Diminuir texto">A−</button>
-          <output class="acess-valor" aria-live="polite">100%</output>
-          <button type="button" data-acao="maior" aria-label="Aumentar texto">A+</button>
-        </div>
+  <!-- 7. Visite -->
+  <section class="visite secao" id="visite" aria-labelledby="titulo-visite">
+    <h2 id="titulo-visite" class="visite-titulo">Tem lugar para mais um café.</h2>
+    <dl class="visite-dados">
+      <div>
+        <dt>Endereço</dt>
+        <dd>Rua das Flores, 128<br>Centro, Florianópolis, SC</dd>
       </div>
-      <button type="button" class="acess-opcao" data-opcao="contraste" aria-pressed="false">Alto contraste</button>
-      <button type="button" class="acess-opcao" data-opcao="parado" aria-pressed="false">Parar animações e vídeos</button>
-      <button type="button" class="acess-opcao" data-opcao="legivel" aria-pressed="false">Fonte mais legível</button>
-      <button type="button" class="acess-opcao" data-opcao="espaco" aria-pressed="false">Mais espaço entre linhas</button>
-      <button type="button" class="acess-opcao" data-opcao="links" aria-pressed="false">Destacar links e botões</button>
-      <button type="button" class="acess-zerar" data-acao="zerar">Voltar ao padrão</button>
-    </section>
-  </div>
+      <div>
+        <dt>Horários</dt>
+        <dd>Segunda a sexta, 8h às 19h<br>Sábado, 9h às 18h<br>Domingo, fechado</dd>
+      </div>
+    </dl>
+    <a class="botao" href="https://www.google.com/maps/search/?api=1&amp;query=Rua+das+Flores+128+Florian%C3%B3polis" target="_blank" rel="noopener">Como chegar<span class="oculto"> (abre em nova aba)</span></a>
+  </section>
+  <svg class="nome-grande" viewBox="0 0 1000 170" aria-hidden="true" focusable="false"><text x="8" y="132" textLength="960" lengthAdjust="spacingAndGlyphs">Café Vagar</text></svg>
+</main>
 
-  <script src="app.js" defer></script>
+<footer class="rodape">
+  <p><strong>Site demonstrativo.</strong> O Café Vagar é uma marca fictícia: endereço, horários, preços, imagens e depoimentos foram criados para este projeto de portfólio. As imagens foram geradas com inteligência artificial.</p>
+  <p class="rodape-autora">Projeto e site: Letícia Beatriz.
+    <a class="botao botao--contorno" href="https://wa.me/5548996862073?text=Oi%2C%20Let%C3%ADcia!%20Vi%20o%20site%20do%20Caf%C3%A9%20Vagar%20e%20quero%20um%20site%20assim%20para%20o%20meu%20neg%C3%B3cio." target="_blank" rel="noopener">Quero um site assim<span class="oculto"> (abre o WhatsApp em nova aba)</span></a>
+  </p>
+  <p><a href="acessibilidade.html">Declaração de acessibilidade</a></p>
+</footer>
+
+<div class="acess">
+  <button class="acess-botao" type="button" aria-expanded="false" aria-controls="acess-painel">
+    <svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22"><circle cx="12" cy="4.2" r="2.2" fill="currentColor"/><path d="M4 8.2c2.6.8 5.3 1.2 8 1.2s5.4-.4 8-1.2M12 9.4v5.2m0 0-3.4 6.6m3.4-6.6 3.4 6.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    <span class="oculto">Acessibilidade</span>
+  </button>
+  <section class="acess-painel" id="acess-painel" aria-label="Opções de acessibilidade" hidden>
+    <p class="acess-titulo">Ajuste a página do seu jeito</p>
+    <div class="acess-linha">
+      <span id="rot-texto">Tamanho do texto</span>
+      <div class="acess-grupo" role="group" aria-labelledby="rot-texto">
+        <button type="button" data-acao="menor" aria-label="Diminuir texto">A−</button>
+        <output class="acess-valor" aria-live="polite">100%</output>
+        <button type="button" data-acao="maior" aria-label="Aumentar texto">A+</button>
+      </div>
+    </div>
+    <button type="button" class="acess-opcao" data-opcao="contraste" aria-pressed="false">Alto contraste</button>
+    <button type="button" class="acess-opcao" data-opcao="parado" aria-pressed="false">Parar animações</button>
+    <button type="button" class="acess-opcao" data-opcao="legivel" aria-pressed="false">Fonte mais legível</button>
+    <button type="button" class="acess-opcao" data-opcao="espaco" aria-pressed="false">Mais espaço entre linhas</button>
+    <button type="button" class="acess-opcao" data-opcao="links" aria-pressed="false">Destacar links e botões</button>
+    <button type="button" class="acess-zerar" data-acao="zerar">Voltar ao padrão</button>
+  </section>
+</div>
+
+<script src="app.js" defer></script>
 </body>
 </html>

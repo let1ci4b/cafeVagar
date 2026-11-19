@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Declaração de acessibilidade · Café Vagar (site demonstrativo)</title>
+<meta name="description" content="Como o site demonstrativo do Café Vagar foi feito para ser acessível e como avisar sobre alguma barreira.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#15110E">
+<link rel="icon" href="assets/icone/icone.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icone/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo com-fundo">
+  <a class="logo" href="./">Café Vagar</a>
+  <nav aria-label="Principal"><ul><li><a href="./">Voltar ao site</a></li></ul></nav>
+</header>
+<main id="conteudo" class="secao declaracao">
+  <h1>Declaração de acessibilidade</h1>
+  <p>Este é um site demonstrativo, feito por Letícia Beatriz para o portfólio dela. O Café Vagar é uma marca fictícia.</p>
+
+  <h2>O que o site cumpre</h2>
+  <p>A meta é o nível AA das Diretrizes de Acessibilidade para Conteúdo Web (WCAG 2.2), em linha com a Lei Brasileira de Inclusão (Lei 13.146/2015, art. 63) e a norma ABNT NBR 17225.</p>
+  <ul>
+    <li>Todo o conteúdo funciona só com o teclado, com foco sempre visível e um link para pular direto ao conteúdo.</li>
+    <li>Textos e botões têm contraste de pelo menos 4,5 para 1 com o fundo.</li>
+    <li>Quem ativa "reduzir movimento" no aparelho vê a página parada e completa. O mesmo vale para a opção "Parar animações" do menu de acessibilidade.</li>
+    <li>O menu de acessibilidade (botão redondo no canto inferior direito) permite aumentar o texto, ligar o alto contraste, trocar para uma fonte mais simples, aumentar o espaço entre as linhas e destacar links e botões.</li>
+    <li>As imagens que trazem informação têm descrição. As imagens só decorativas são ignoradas pelos leitores de tela.</li>
+    <li>Nenhum texto fica dentro de imagem.</li>
+  </ul>
+
+  <h2>Como foi testado</h2>
+  <p>Em 19 de novembro de 2026: verificação automática com o axe (WCAG 2.2 AA) em telas de celular e de computador, validador de HTML, Lighthouse, navegação completa pelo teclado e conferência com "reduzir movimento" ligado.</p>
+
+  <h2>Limitações conhecidas</h2>
+  <p>A abertura, em que a rolagem leva da rua para dentro da cafeteria, é decorativa: o título e o botão dela estão em texto e aparecem também na versão parada. As fotos do cardápio que acompanham o mouse aparecem só em telas grandes; em telas pequenas cada item mostra uma miniatura.</p>
+
+  <h2>Encontrou alguma barreira?</h2>
+  <p>Avise a Letícia pelo <a href="https://wa.me/5548996862073" target="_blank" rel="noopener">WhatsApp (48) 99686-2073<span class="oculto"> (abre em nova aba)</span></a> ou pelo e-mail <a href="mailto:leticiabeasouza@gmail.com">leticiabeasouza@gmail.com</a>.</p>
+</main>
+</body>
+</html>

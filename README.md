@@ -1,41 +1,30 @@
 # Café Vagar
 
-**Site demonstrativo de uma cafeteria fictícia, contado como um filme em cinco atos.**
+**Site demonstrativo de uma cafeteria fictícia, contado como um curta-metragem.**
 
 🔗 **Ver o site:** https://cafevagar.pages.dev/
 
-O Café Vagar não existe: é um projeto de portfólio de [Letícia Beatriz](https://www.linkedin.com/in/leticia-beatriz015). A marca, o endereço, os horários, os preços e os depoimentos foram inventados para mostrar o que um site de pequeno negócio pode ser.
+O Café Vagar não existe: é um projeto de portfólio de [Letícia Beatriz](https://www.linkedin.com/in/leticia-beatriz015). A marca, o endereço, os horários, os preços, as imagens e os depoimentos foram criados para mostrar o que um site de pequeno negócio pode ser.
 
 ## A ideia
 
-*"O tempo passa. O café fica."* Em vez de começar pelo cardápio, o site começa pela atmosfera. A rolagem conduz o visitante como uma câmera:
-
-1. **A chegada:** na calçada, à noite, com créditos de filme. A rolagem caminha até a vitrine iluminada, atravessa o vidro e entra na cafeteria.
-2. **O lugar:** três momentos (o silêncio, a conversa, o ritual) passam como uma tira de filme.
-3. **O ritual:** a rolagem controla o leite sendo servido na xícara, quadro a quadro.
-4. **As pessoas:** quem fica mais um pouco.
-5. **O convite:** endereço, horários e um "fim".
+*"O tempo passa. O café fica."* A rolagem é uma caminhada: a rua ao entardecer, a vitrine acesa que cresce e o salão por dentro. Depois, uma tira de filme pelo salão, o ritual do café em três tempos, o cardápio em que a foto acompanha o olhar e os dados para visitar.
 
 ## Acessibilidade
 
-O movimento é um enfeite, nunca uma barreira:
-
-- **Menu de acessibilidade:** tamanho do texto, alto contraste, parar animações, fonte mais legível, mais espaço entre linhas e destaque de links. As escolhas ficam salvas no navegador.
-- **Movimento reduzido:** quem ativa "reduzir movimento" no aparelho vê a página parada e completa, sem baixar as sequências de imagens.
-- **Navegação:** o site funciona só com o teclado, tem foco visível e um link para pular direto ao conteúdo.
-- **Imagens:** todas as fotos têm texto alternativo.
-- **Verificação:** o site passa no axe (WCAG 2.2 AA) e no validador de HTML, e tirou 100 em desempenho, acessibilidade e boas práticas no Lighthouse.
+- **Menu de acessibilidade:** tamanho do texto, alto contraste, parar animações, fonte mais legível, mais espaço entre linhas e destaque de links.
+- **Movimento reduzido:** quem ativa "reduzir movimento" no aparelho vê a página parada e completa, sem baixar as imagens da abertura.
+- **Teclado:** o site funciona só com o teclado, com foco visível e link para pular ao conteúdo.
+- **Verificação:** validador de HTML (vnu) sem erros, axe (WCAG 2.2 AA) sem violações em 360, 390 e 1440 px, Lighthouse 100 em acessibilidade e boas práticas.
+- [Declaração de acessibilidade](https://cafevagar.pages.dev/acessibilidade.html).
 
 ## Como foi feito
 
-- **Código:** HTML, CSS e JavaScript puros, sem frameworks nem bibliotecas.
-- **Fontes:** Cormorant Garamond, DM Sans e IBM Plex Mono, hospedadas junto com o site (nenhuma chamada a serviços externos).
-- **Imagens:** fotos e vídeos do Pexels, com o mesmo tratamento de cor quente aplicado a todos. As cenas de rolagem são sequências de imagens WebP desenhadas num `<canvas>`, carregadas só quando o visitante chega perto delas.
+- **Processo:** especificação com números exatos (conceito, `PROMPT.md`, `CLAUDE.md` e plano de imagens), depois a construção.
+- **Imagens:** geradas com IA (Google Gemini, Nano Banana) a partir de um "estilo comum" único, para todas terem a mesma luz, paleta e grão. A fachada foi recortada e alinhada com a rua para a abertura ter profundidade. As versões antigas, com fotos do Pexels, estão na etiqueta `v1-pexels`.
+- **Código:** HTML, CSS e JavaScript puros, sem bibliotecas e sem build.
+- **Fontes:** Fraunces e Instrument Sans (licença SIL OFL), hospedadas junto com o site.
 - **Hospedagem:** Cloudflare Pages.
-
-## Créditos das imagens
-
-Todas as fotos e vídeos vêm do [Pexels](https://www.pexels.com/license/) (licença Pexels, uso livre). A lista completa, com autores e links, está no rodapé do site, em "Créditos de fotos e vídeos".
 
 ---
 

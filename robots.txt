@@ -1,0 +1,3 @@
+# Site demonstrativo: fora do Google até a Letícia liberar.
+User-agent: *
+Disallow: /
