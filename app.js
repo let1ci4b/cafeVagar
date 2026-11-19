@@ -80,7 +80,45 @@
   const ritualTrilha = document.querySelector(".ritual-trilha");
   const ritualQuadro = document.querySelector(".ritual-quadro");
   const ritualFotos = document.querySelector(".ritual-fotos");
-  const [rf1, rf2, rf3] = ritualFotos.querySelectorAll("img");
+  const ritualCanvas = ritualFotos.querySelector(".ritual-canvas");
+  const ctx = ritualCanvas.getContext("2d");
+  const TOTAL_QUADROS = 120;
+  const quadros = { l: [], a: [] };
+  let pedidoQuadros = false, quadroDesenhado = -1, versaoDesenhada = "", indiceDesejado = -1;
+  const versao = () => (innerWidth / innerHeight < 1 ? "a" : "l");
+  // Carrega os quadros aos poucos: primeiro 1 a cada 8, depois o resto.
+  function carregarQuadros() {
+    if (pedidoQuadros) return;
+    pedidoQuadros = true;
+    const v = versao();
+    const ordem = [];
+    for (let passo of [8, 4, 2, 1]) for (let i = 1; i <= TOTAL_QUADROS; i += passo) if (!ordem.includes(i)) ordem.push(i);
+    let k = 0;
+    const proximo = () => {
+      if (k >= ordem.length) return;
+      const n = ordem[k++];
+      const img = new Image();
+      img.decoding = "async";
+      img.onload = () => { quadros[v][n] = img; if (indiceDesejado >= 0 && Math.abs(n - 1 - indiceDesejado) < 10 && movimento) desenharQuadro(indiceDesejado); proximo(); };
+      img.onerror = proximo;
+      img.src = `assets/ritual/${v}_${String(n).padStart(3, "0")}.webp`;
+    };
+    for (let i = 0; i < 4; i++) proximo();
+  }
+  function desenharQuadro(indice) {
+    const v = versao();
+    let img = null;
+    for (let d = 0; d < TOTAL_QUADROS && !img; d++) img = quadros[v][indice + 1 - d] || quadros[v][indice + 1 + d] || null;
+    if (!img) return;
+    const r = ritualCanvas.getBoundingClientRect();
+    const dpr = Math.min(2, devicePixelRatio || 1);
+    const w = Math.round(r.width * dpr), h = Math.round(r.height * dpr);
+    if (ritualCanvas.width !== w || ritualCanvas.height !== h) { ritualCanvas.width = w; ritualCanvas.height = h; }
+    const esc = Math.max(w / img.naturalWidth, h / img.naturalHeight);
+    const dw = img.naturalWidth * esc, dh = img.naturalHeight * esc;
+    ctx.drawImage(img, (w - dw) * (v === "a" ? 0.62 : 0.5), (h - dh) * 0.6, dw, dh);
+    quadroDesenhado = indice; versaoDesenhada = v;
+  }
   const ritualPainel = document.querySelector(".ritual-painel");
   const ritualTempo = document.querySelector(".ritual-tempo");
   const ritualFrase = document.querySelector(".ritual-frase");
@@ -110,7 +148,7 @@
     pedirQuadro();
   }
   function limparEstilos() {
-    for (const el of [salao, titulo, fim, creditos, dica, fundo, fachada, lugarFaixa, reguaLinha, ritualFotos, rf2, rf3, ritualQuadro, ritualPainel, ritualLegenda, ...tarjas]) {
+    for (const el of [salao, titulo, fim, creditos, dica, fundo, fachada, lugarFaixa, reguaLinha, ritualFotos, ritualQuadro, ritualPainel, ritualLegenda, ...tarjas]) {
       if (el) { el.style.transform = ""; el.style.opacity = ""; el.style.clipPath = ""; el.style.visibility = ""; }
     }
   }
@@ -170,8 +208,10 @@
 
   function desenharRitual(p) {
     ritualFotos.style.transform = `scale(${mistura(1.12, 1, faixa(p, 0, 0.85)).toFixed(4)})`;
-    rf2.style.opacity = faixa(p, 0.26, 0.34).toFixed(3);
-    rf3.style.opacity = faixa(p, 0.56, 0.64).toFixed(3);
+    carregarQuadros();
+    const indice = Math.round(faixa(p, 0.02, 0.80) * (TOTAL_QUADROS - 1));
+    indiceDesejado = indice;
+    if (indice !== quadroDesenhado || versao() !== versaoDesenhada) desenharQuadro(indice);
     const etapa = p < 0.30 ? 0 : p < 0.60 ? 1 : 2;
     if (etapa !== etapaAtual) {
       etapaAtual = etapa;
@@ -301,7 +341,7 @@
   let tempoResize = 0;
   addEventListener("resize", () => {
     clearTimeout(tempoResize);
-    tempoResize = setTimeout(() => { trilhas.forEach((t) => { t.ultimo = -1; }); desenharFios(); prepararCardapio(); pedirQuadro(); }, 120);
+    tempoResize = setTimeout(() => { trilhas.forEach((t) => { t.ultimo = -1; }); quadroDesenhado = -1; if (pedidoQuadros && !quadros[versao()].length) { pedidoQuadros = false; } desenharFios(); prepararCardapio(); pedirQuadro(); }, 120);
   });
   reduzirSistema.addEventListener("change", atualizarMovimento);
   document.fonts && document.fonts.ready.then(desenharFios);

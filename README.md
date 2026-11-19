@@ -21,7 +21,7 @@ O Café Vagar não existe: é um projeto de portfólio de [Letícia Beatriz](htt
 ## Como foi feito
 
 - **Processo:** especificação com números exatos (conceito, `PROMPT.md`, `CLAUDE.md` e plano de imagens), depois a construção.
-- **Imagens:** geradas com IA (Google Gemini, Nano Banana) a partir de um "estilo comum" único, para todas terem a mesma luz, paleta e grão. A fachada foi recortada e alinhada com a rua para a abertura ter profundidade. As versões antigas, com fotos do Pexels, estão na etiqueta `v1-pexels`.
+- **Imagens e vídeo:** gerados com IA (Google Gemini, Nano Banana, e Veo para o leite sendo servido, cortado em 120 quadros que a rolagem "toca") a partir de um "estilo comum" único, para todas terem a mesma luz, paleta e grão. A fachada foi recortada e alinhada com a rua para a abertura ter profundidade. As versões antigas, com fotos do Pexels, estão na etiqueta `v1-pexels`.
 - **Código:** HTML, CSS e JavaScript puros, sem bibliotecas e sem build.
 - **Fontes:** Fraunces e Instrument Sans (licença SIL OFL), hospedadas junto com o site.
 - **Hospedagem:** Cloudflare Pages.
