@@ -126,7 +126,7 @@ Como não há build, o que você vê no computador é exatamente o que vai para 
 ## Publicar
 
 - **Cloudflare Pages (oficial):** cada envio para a branch `main` publica o site em https://cafevagar.pages.dev/. Configuração: sem comando de build, pasta de saída `/` (a raiz).
-- **Versão anterior:** a primeira versão, com fotos de banco de imagens, está guardada na etiqueta `v1-pexels`.
+- **Versão anterior:** a primeira versão, com fotos de banco de imagens, está guardada no branch [`versao-1-pexels`](https://github.com/let1ci4b/cafeVagar/tree/versao-1-pexels).
 
 ## Créditos
 
