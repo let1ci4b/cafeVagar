@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/img/compartilhar.jpg" alt="Café Vagar: uma pequena cafeteria verde com a vitrine acesa numa rua de bairro ao entardecer." width="100%">
+<img src="docs/capa.jpg" alt="Café Vagar: uma pequena cafeteria verde com a vitrine acesa numa rua de bairro ao entardecer." width="100%">
 
 # Café Vagar
 
