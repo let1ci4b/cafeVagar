@@ -65,11 +65,11 @@
   const cena = chegada.querySelector(".cena");
   const salao = chegada.querySelector(".salao");
   const tarjas = chegada.querySelectorAll(".tarja");
-  const creditos = chegada.querySelector(".creditos");
+  const vidro = chegada.querySelector(".vidro");
+  const preto = chegada.querySelector(".preto");
+  const falas = [...chegada.querySelectorAll(".fala")];
   const dica = chegada.querySelector(".dica");
-  const titulo = chegada.querySelector(".chegada-titulo");
-  const fim = chegada.querySelector(".chegada-fim");
-  let fundo = null, fachada = null;
+  const canvasChegada = cena.querySelector(".cena-canvas");
 
   const lugarTrilha = document.querySelector(".lugar-trilha");
   const lugarFaixa = document.querySelector(".lugar-faixa");
@@ -80,45 +80,53 @@
   const ritualTrilha = document.querySelector(".ritual-trilha");
   const ritualQuadro = document.querySelector(".ritual-quadro");
   const ritualFotos = document.querySelector(".ritual-fotos");
-  const ritualCanvas = ritualFotos.querySelector(".ritual-canvas");
-  const ctx = ritualCanvas.getContext("2d");
-  const TOTAL_QUADROS = 120;
-  const quadros = { l: [], a: [] };
-  let pedidoQuadros = false, quadroDesenhado = -1, versaoDesenhada = "", indiceDesejado = -1;
   const versao = () => (innerWidth / innerHeight < 1 ? "a" : "l");
-  // Carrega os quadros aos poucos: primeiro 1 a cada 8, depois o resto.
-  function carregarQuadros() {
-    if (pedidoQuadros) return;
-    pedidoQuadros = true;
-    const v = versao();
-    const ordem = [];
-    for (let passo of [8, 4, 2, 1]) for (let i = 1; i <= TOTAL_QUADROS; i += passo) if (!ordem.includes(i)) ordem.push(i);
-    let k = 0;
-    const proximo = () => {
-      if (k >= ordem.length) return;
-      const n = ordem[k++];
-      const img = new Image();
-      img.decoding = "async";
-      img.onload = () => { quadros[v][n] = img; if (indiceDesejado >= 0 && Math.abs(n - 1 - indiceDesejado) < 10 && movimento) desenharQuadro(indiceDesejado); proximo(); };
-      img.onerror = proximo;
-      img.src = `assets/ritual/${v}_${String(n).padStart(3, "0")}.webp`;
-    };
-    for (let i = 0; i < 4; i++) proximo();
+  // Sequência de quadros (vídeo "tocado" pela rolagem) desenhada num canvas.
+  // Carrega aos poucos: primeiro 1 a cada 8 quadros, depois o resto.
+  function criarSequencia(canvas, pasta, total, ancora) {
+    const ctx = canvas.getContext("2d");
+    const quadros = { l: [], a: [] };
+    const pedidos = { l: false, a: false };
+    let desenhado = -1, versaoDesenhada = "", desejado = -1;
+    function carregar() {
+      const v = versao();
+      if (pedidos[v]) return;
+      pedidos[v] = true;
+      const ordem = [];
+      for (const passo of [8, 4, 2, 1]) for (let i = 1; i <= total; i += passo) if (!ordem.includes(i)) ordem.push(i);
+      let k = 0;
+      const proximo = () => {
+        if (k >= ordem.length) return;
+        const n = ordem[k++];
+        const img = new Image();
+        img.decoding = "async";
+        img.onload = () => { quadros[v][n] = img; if (desejado >= 0 && Math.abs(n - 1 - desejado) < 10 && movimento) desenhar(desejado, true); proximo(); };
+        img.onerror = proximo;
+        img.src = `${pasta}/${v}_${String(n).padStart(3, "0")}.webp`;
+      };
+      for (let i = 0; i < 4; i++) proximo();
+    }
+    function desenhar(indice, forcar) {
+      desejado = indice;
+      const v = versao();
+      if (!forcar && indice === desenhado && v === versaoDesenhada) return;
+      let img = null;
+      for (let d = 0; d < total && !img; d++) img = quadros[v][indice + 1 - d] || quadros[v][indice + 1 + d] || null;
+      if (!img) return;
+      const r = canvas.getBoundingClientRect();
+      const dpr = Math.min(2, devicePixelRatio || 1);
+      const w = Math.round(r.width * dpr), h = Math.round(r.height * dpr);
+      if (!w || !h) return;
+      if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+      const esc = Math.max(w / img.naturalWidth, h / img.naturalHeight);
+      const dw = img.naturalWidth * esc, dh = img.naturalHeight * esc;
+      ctx.drawImage(img, (w - dw) * ancora[v][0], (h - dh) * ancora[v][1], dw, dh);
+      desenhado = indice; versaoDesenhada = v;
+    }
+    return { carregar, desenhar, invalidar: () => { desenhado = -1; } };
   }
-  function desenharQuadro(indice) {
-    const v = versao();
-    let img = null;
-    for (let d = 0; d < TOTAL_QUADROS && !img; d++) img = quadros[v][indice + 1 - d] || quadros[v][indice + 1 + d] || null;
-    if (!img) return;
-    const r = ritualCanvas.getBoundingClientRect();
-    const dpr = Math.min(2, devicePixelRatio || 1);
-    const w = Math.round(r.width * dpr), h = Math.round(r.height * dpr);
-    if (ritualCanvas.width !== w || ritualCanvas.height !== h) { ritualCanvas.width = w; ritualCanvas.height = h; }
-    const esc = Math.max(w / img.naturalWidth, h / img.naturalHeight);
-    const dw = img.naturalWidth * esc, dh = img.naturalHeight * esc;
-    ctx.drawImage(img, (w - dw) * (v === "a" ? 0.62 : 0.5), (h - dh) * 0.6, dw, dh);
-    quadroDesenhado = indice; versaoDesenhada = v;
-  }
+  const seqChegada = criarSequencia(canvasChegada, "assets/chegada", 90, { a: [0.5, 0.5], l: [0.5, 0.52] });
+  const seqRitual = criarSequencia(ritualFotos.querySelector(".ritual-canvas"), "assets/ritual", 120, { a: [0.62, 0.6], l: [0.5, 0.6] });
   const ritualPainel = document.querySelector(".ritual-painel");
   const ritualTempo = document.querySelector(".ritual-tempo");
   const ritualFrase = document.querySelector(".ritual-frase");
@@ -138,19 +146,16 @@
     movimento = quer;
     raiz.classList.toggle("com-movimento", quer);
     raiz.classList.toggle("parado", !quer);
-    if (quer && !fundo) {
-      cena.append(document.getElementById("modelo-cena").content.cloneNode(true));
-      fundo = cena.querySelector(".cena-fundo");
-      fachada = cena.querySelector(".cena-fachada");
-    }
+    if (quer) seqChegada.carregar();
     limparEstilos();
     trilhas.forEach((t) => { t.atual = -1; });
     pedirQuadro();
   }
   function limparEstilos() {
-    for (const el of [salao, titulo, fim, creditos, dica, fundo, fachada, lugarFaixa, reguaLinha, ritualFotos, ritualQuadro, ritualPainel, ritualLegenda, ...tarjas]) {
-      if (el) { el.style.transform = ""; el.style.opacity = ""; el.style.clipPath = ""; el.style.visibility = ""; }
+    for (const el of [preto, vidro, salao, dica, canvasChegada, lugarFaixa, reguaLinha, ritualFotos, ritualQuadro, ritualPainel, ritualLegenda, ...tarjas]) {
+      if (el) { el.style.transform = ""; el.style.opacity = ""; el.style.clipPath = ""; el.style.visibility = ""; el.style.filter = ""; }
     }
+    falas.forEach((f) => f.classList.remove("ativa"));
   }
 
   /* ================= Trilhas de rolagem ================= */
@@ -161,33 +166,27 @@
     return total > 0 ? limita(-r.top / total) : 0;
   }
 
+  // A chegada (como no Café Vagar antigo): a rua surge do escuro, a câmera caminha até a
+  // vitrine, a luz quente do vidro toma a tela num clarão e o salão entra em foco.
+  const suave = (t) => t * t * (3 - 2 * t);
   function desenharChegada(p) {
-    const t1 = faixa(p, 0, 0.40), t2 = faixa(p, 0.40, 0.68);
-    const escFundo = p < 0.40 ? mistura(1, 1.30, ease.sineInOut(t1)) : mistura(1.30, 1.55, t2);
-    const escFach = p < 0.40 ? mistura(1, 2.4, ease.sineIn(t1)) : mistura(2.4, largo.matches ? 18 : 14, ease.expoIn(t2));
-    if (fundo) {
-      fundo.style.transform = `scale(${escFundo.toFixed(4)})`;
-      fundo.style.opacity = p > 0.7 ? "0" : "1";
-    }
-    if (fachada) {
-      fachada.style.transform = `scale(${escFach.toFixed(4)})`;
-      fachada.style.opacity = (1 - faixa(p, 0.60, 0.70)).toFixed(3);
-    }
-    const salaoOp = faixa(p, 0.52, 0.66);
-    const salaoEsc = p < 0.68 ? mistura(1.14, 1.04, faixa(p, 0.40, 0.68)) : mistura(1.04, 1, faixa(p, 0.70, 1));
-    salao.style.opacity = salaoOp.toFixed(3);
-    salao.style.transform = `scale(${salaoEsc.toFixed(4)})`;
-    const tTarja = 1 - ease.sineInOut(faixa(p, 0, 0.12));
-    tarjas.forEach((t) => { t.style.transform = `scaleY(${tTarja.toFixed(4)})`; });
-    creditos.style.opacity = (1 - faixa(p, 0, 0.12)).toFixed(3);
+    // começa no preto, com os créditos; a rua surge escura e vai clareando
+    preto.style.opacity = Math.max(1 - ease.sineInOut(faixa(p, 0.16, 0.28)), ease.sineInOut(faixa(p, 0.88, 0.99))).toFixed(3);  // no fim, o salão escurece até a cor da página: a próxima seção nasce do mesmo escuro
+    seqChegada.desenhar(Math.round(faixa(p, 0.20, 0.50) * 89));
+    const brilho = 0.35 + 0.65 * faixa(p, 0.18, 0.34);
+    const desfoque = faixa(p, 0.44, 0.52) * 8;
+    canvasChegada.style.filter = `brightness(${brilho.toFixed(2)})` + (desfoque > 0.2 ? ` blur(${desfoque.toFixed(1)}px)` : "");
+    canvasChegada.style.opacity = (1 - faixa(p, 0.48, 0.54)).toFixed(3);
+    vidro.style.opacity = (faixa(p, 0.40, 0.50) * (1 - faixa(p, 0.51, 0.58))).toFixed(3);
+    const entra = faixa(p, 0.47, 0.57);
+    salao.style.opacity = entra.toFixed(3);
+    salao.style.transform = `scale(${(1.15 - 0.15 * suave(entra) + 0.06 * suave(faixa(p, 0.57, 1))).toFixed(4)})`;
+    salao.style.filter = entra < 1 ? `blur(${((1 - entra) * 8).toFixed(1)}px)` : "";
+    const a = suave(faixa(p, 0.24, 0.40));
+    tarjas[0].style.transform = `translateY(${(-100 * a).toFixed(1)}%)`;
+    tarjas[1].style.transform = `translateY(${(100 * a).toFixed(1)}%)`;
     dica.style.opacity = (1 - faixa(p, 0, 0.04)).toFixed(3);
-    const tTit = faixa(p, 0.22, 0.36);
-    titulo.style.opacity = (1 - tTit).toFixed(3);
-    titulo.style.transform = `translate(-50%, ${(-48 * tTit).toFixed(1)}px)`;
-    const tFim = ease.expoOut(faixa(p, 0.74, 0.84));
-    fim.style.opacity = tFim.toFixed(3);
-    fim.style.transform = `translateY(${(24 * (1 - tFim)).toFixed(1)}px)`;
-    fim.style.visibility = tFim < 0.01 ? "hidden" : "";
+    for (const f of falas) f.classList.toggle("ativa", p >= +f.dataset.de && p < +f.dataset.ate);
   }
 
   function desenharLugar(p) {
@@ -207,11 +206,9 @@
   }
 
   function desenharRitual(p) {
-    ritualFotos.style.transform = `scale(${mistura(1.12, 1, faixa(p, 0, 0.85)).toFixed(4)})`;
-    carregarQuadros();
-    const indice = Math.round(faixa(p, 0.02, 0.80) * (TOTAL_QUADROS - 1));
-    indiceDesejado = indice;
-    if (indice !== quadroDesenhado || versao() !== versaoDesenhada) desenharQuadro(indice);
+    ritualFotos.style.transform = `scale(${mistura(1.05, 1, faixa(p, 0, 0.85)).toFixed(4)})`;
+    seqRitual.carregar();
+    seqRitual.desenhar(Math.round(faixa(p, 0.02, 0.80) * 119));
     const etapa = p < 0.30 ? 0 : p < 0.60 ? 1 : 2;
     if (etapa !== etapaAtual) {
       etapaAtual = etapa;
@@ -225,8 +222,7 @@
     }
     ritualPainel.style.opacity = (1 - faixa(p, 0.82, 0.86)).toFixed(3);
     const q = ease.sineInOut(faixa(p, 0.82, 1));
-    const [vy, vx] = largo.matches ? [12, 22] : [14, 8];
-    ritualQuadro.style.clipPath = q > 0 ? `inset(${(vy * q).toFixed(2)}svh ${(vx * q).toFixed(2)}vw round 2px)` : "";
+    ritualQuadro.style.clipPath = q > 0 ? `inset(${(10 * q).toFixed(2)}% ${(14 * q).toFixed(2)}% round 2px)` : "";
     ritualLegenda.style.opacity = faixa(p, 0.92, 1).toFixed(3);
   }
 
@@ -336,12 +332,20 @@
   });
   document.querySelector(".itens").addEventListener("pointerleave", () => { seguindo = false; mostrarPrevia(null); });
 
+  /* ================= Entrada de "Sem relógio" ================= */
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver((entradas, obs) => {
+      entradas.forEach((e) => { if (e.isIntersecting) { semRelogio.classList.add("visivel"); obs.disconnect(); } });
+    }, { threshold: 0.25 }).observe(semRelogio);
+  } else semRelogio.classList.add("visivel");
+  semRelogio.addEventListener("focusin", () => semRelogio.classList.add("visivel"));
+
   /* ================= Eventos ================= */
   addEventListener("scroll", pedirQuadro, { passive: true });
   let tempoResize = 0;
   addEventListener("resize", () => {
     clearTimeout(tempoResize);
-    tempoResize = setTimeout(() => { trilhas.forEach((t) => { t.ultimo = -1; }); quadroDesenhado = -1; if (pedidoQuadros && !quadros[versao()].length) { pedidoQuadros = false; } desenharFios(); prepararCardapio(); pedirQuadro(); }, 120);
+    tempoResize = setTimeout(() => { trilhas.forEach((t) => { t.ultimo = -1; }); seqRitual.invalidar(); seqChegada.invalidar(); desenharFios(); prepararCardapio(); pedirQuadro(); }, 120);
   });
   reduzirSistema.addEventListener("change", atualizarMovimento);
   document.fonts && document.fonts.ready.then(desenharFios);

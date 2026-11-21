@@ -104,59 +104,59 @@ a:hover, a:focus-visible { text-decoration-thickness: 2px; }
 }
 
 /* ---------- 1. Chegada ---------- */
-.chegada { position: relative; height: 100svh; }
+.chegada { position: relative; }
 .chegada-palco { position: relative; height: 100svh; overflow: hidden; }
-.chegada-camadas, .cena, .salao, .tarja { position: absolute; }
+.chegada-camadas, .cena, .salao, .tarja, .vidro, .vinheta { position: absolute; }
 .chegada-camadas { inset: 0; }
-.cena {
-  left: 50%; top: 50%; width: max(100vw, calc(100svh * 2400 / 1340)); aspect-ratio: 2400 / 1340;
-  transform: translate(-50%, -50%);
-}
-.cena img { position: absolute; inset: 0; width: 100%; height: 100%; transform-origin: 56.5% 67%; will-change: transform; }
+.cena { inset: 0; }
+.cena-canvas { position: absolute; inset: 0; width: 100%; height: 100%; will-change: filter, opacity; }
 .chegada-camadas picture { display: contents; }
 .salao { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
-@media (max-aspect-ratio: 1/1) {
-  .cena { width: max(100vw, calc(100svh * 754 / 1340)); aspect-ratio: 754 / 1340; }
-  .cena img { transform-origin: 69.4% 67%; }
-}
-.tarja { left: 0; right: 0; height: 12vh; background: var(--noite); transform-origin: top; }
+/* o clarão quente da vitrine ao atravessar o vidro */
+.vidro { inset: 0; opacity: 0; pointer-events: none; mix-blend-mode: screen;
+  background: radial-gradient(40% 45% at 50% 58%, rgba(255,214,150,.95), rgba(214,150,80,.55) 45%, rgba(40,26,12,0) 80%); }
+.preto { position: absolute; inset: 0; background: var(--noite); display: none; }
+.com-movimento .preto { display: block; }
+.vinheta { inset: 0; pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 50%, transparent 40%, rgba(21,17,14,.8) 100%), linear-gradient(to top, rgba(21,17,14,.85), transparent 45%); }
+.tarja { left: 0; right: 0; height: 12vh; background: var(--noite); }
 .tarja--cima { top: 0; }
-.tarja--baixo { bottom: 0; transform-origin: bottom; }
+.tarja--baixo { bottom: 0; }
 
-.creditos, .dica { position: absolute; left: 0; right: 0; text-align: center; font-size: var(--t-legenda); letter-spacing: .01em; color: var(--areia); }
-.creditos { top: calc(12vh + var(--e6)); display: flex; flex-direction: column; color: var(--creme); font-weight: 600; text-shadow: 0 0 18px rgba(21,17,14,.85), 0 1px 3px rgba(21,17,14,.7); }
-.dica { color: var(--creme); font-weight: 600; text-shadow: 0 0 14px rgba(21,17,14,.9); }
-.dica { bottom: calc(12vh + var(--e7)); }
-.chegada-titulo {
-  position: absolute; left: 50%; top: 16svh; transform: translateX(-50%); width: min(14ch, 90vw);
-  text-align: center; font-size: clamp(2.75rem, 1.4rem + 3.6vw, 4.75rem); line-height: 1; letter-spacing: -0.025em;
-  font-variation-settings: "opsz" 144; text-shadow: 0 0 48px rgba(21,17,14,.55);
+/* falas: aparecem uma de cada vez, como legendas de filme */
+.falas { position: absolute; inset: 0; text-shadow: 0 2px 24px rgba(21,17,14,.65); }
+.fala {
+  position: absolute; left: var(--sec-lado); right: var(--sec-lado); bottom: calc(12vh + var(--e7)); max-width: 46rem;
+  opacity: 0; transform: translateY(20px); pointer-events: none;
+  transition: opacity .8s ease, transform 1s var(--sai);
 }
-.chegada-titulo .linha { display: block; }
-.chegada-fim { position: absolute; left: var(--sec-lado); bottom: var(--e8); max-width: 30ch; display: grid; gap: var(--e4); justify-items: start; }
-.chegada-fim-texto { font: 500 var(--t-h3)/1.2 var(--f-titulo); font-variation-settings: "opsz" 36; }
+.fala.ativa, .fala:focus-within { opacity: 1; transform: none; pointer-events: auto; }
+.fala--credito { left: 0; right: 0; bottom: auto; top: 50%; max-width: none; text-align: center; transform: translateY(-40%); }
+.fala--credito.ativa { transform: translateY(-50%); }
+.credito { font: 300 clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem)/1.15 var(--f-titulo); letter-spacing: .04em; font-variation-settings: "opsz" 96; }
+.credito span { display: block; margin-top: var(--e4); font: 600 var(--t-legenda)/1.4 var(--f-texto); letter-spacing: .08em; color: var(--creme); }
+.fala h1 { font-size: var(--t-display); line-height: 1; letter-spacing: -0.025em; font-variation-settings: "opsz" 144; }
+.frase { font: italic 300 clamp(2.2rem, 1.2rem + 4.2vw, 4.75rem)/1.02 var(--f-titulo); letter-spacing: -0.02em; font-variation-settings: "opsz" 144; margin-bottom: var(--e6); }
+.frase em { font-style: normal; }
+.dica { position: absolute; left: 0; right: 0; bottom: calc(12vh + var(--e5)); text-align: center; font: 600 var(--t-legenda)/1 var(--f-texto); letter-spacing: .04em; color: var(--creme); text-shadow: 0 0 14px rgba(21,17,14,.9); }
+.dica::after { content: ""; display: block; width: 1px; height: 32px; margin: var(--e3) auto 0; background: var(--creme); animation: desce 1.8s ease-in-out infinite; transform-origin: top; }
+@keyframes desce { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 
-/* Versão parada (sem JS, movimento reduzido ou "Parar animações"): só o salão. */
-.cena, .tarja, .creditos, .dica { display: none; }
-.chegada-titulo { top: 14svh; text-shadow: 0 0 40px rgba(21,17,14,.9); }
+/* Versão parada (sem JS, movimento reduzido ou "Parar animações"): só o salão, com o título e a frase. */
+.cena, .tarja, .dica, .vidro, .fala--credito { display: none; }
+html:not(.com-movimento) .chegada-camadas::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(21,17,14,.82) 0%, rgba(21,17,14,.5) 40%, rgba(21,17,14,.1) 60%, rgba(21,17,14,.75) 100%); }
+html:not(.com-movimento) .fala { opacity: 1; transform: none; pointer-events: auto; transition: none; }
+html:not(.com-movimento) .fala--titulo { top: calc(64px + 6svh); bottom: auto; }
 
 /* Versão com movimento */
-.com-movimento .chegada { height: 400svh; }
+.com-movimento .chegada { height: 420svh; }
 .com-movimento .chegada-palco { position: sticky; top: 0; }
-.com-movimento .cena, .com-movimento .tarja, .com-movimento .creditos, .com-movimento .dica { display: block; }
-.com-movimento .creditos { display: flex; }
-.com-movimento .salao { opacity: 0; will-change: opacity, transform; }
-.com-movimento .chegada-fim { opacity: 0; }
-.com-movimento .chegada-titulo { top: 12svh; text-shadow: 0 0 48px rgba(21,17,14,.55); }
-.com-movimento .chegada-titulo .linha, .com-movimento .creditos span { animation: surgir .9s cubic-bezier(.16,1,.3,1) .2s both; }
-.com-movimento .chegada-titulo .linha:nth-child(2) { animation-delay: .32s; }
-.com-movimento .creditos span:nth-child(2) { animation-delay: .32s; }
-@keyframes surgir { from { opacity: 0; transform: translateY(24px); } }
+.com-movimento .cena, .com-movimento .tarja, .com-movimento .dica, .com-movimento .vidro { display: block; }
+.com-movimento .fala--credito { display: block; }
+.com-movimento .salao { opacity: 0; will-change: opacity, transform, filter; }
 @media (max-width: 767px) {
-  .com-movimento .chegada { height: 320svh; }
-  .chegada-titulo { top: 20svh; }
-  .com-movimento .chegada-titulo { top: 22svh; }
-  .chegada-fim { left: var(--e5); right: var(--e5); bottom: var(--e7); max-width: none; }
+  .com-movimento .chegada { height: 340svh; }
+  .fala { left: var(--e5); right: var(--e5); }
 }
 
 /* ---------- 2. Sem relógio ---------- */
@@ -164,7 +164,7 @@ a:hover, a:focus-visible { text-decoration-thickness: 2px; }
 .sem-relogio:focus { outline: none; }
 .sem-relogio-grade { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--e5); align-items: center; }
 .sem-relogio-texto { grid-column: 1 / span 7; }
-.sem-relogio-texto p { margin-top: var(--e6); max-width: 44ch; color: var(--areia); }
+.sem-relogio-texto h2 em { color: var(--areia); }
 .notas { grid-column: 9 / span 4; list-style: none; margin: 0; padding: 0; display: grid; gap: var(--e7); }
 .notas li { font-size: var(--t-legenda); line-height: 1.45; letter-spacing: .01em; max-width: 28ch; position: relative; }
 .fios { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
@@ -219,18 +219,20 @@ a:hover, a:focus-visible { text-decoration-thickness: 2px; }
 .com-movimento .ritual-parado { display: none; }
 .com-movimento .ritual-trilha { height: 320vh; }
 .com-movimento .ritual-palco { display: block; position: sticky; top: 0; height: 100svh; overflow: hidden; }
-.ritual-quadro { position: absolute; inset: 0; will-change: clip-path; }
+/* o vídeo fica num quadro do tamanho que ele aguenta (perto de 960 px), não esticado na tela toda */
+.ritual-quadro { position: absolute; left: 50%; top: 50%; height: min(82svh, calc(88vw * 3 / 4)); aspect-ratio: 4 / 3; transform: translate(-50%, -50%); overflow: hidden; border-radius: 2px; will-change: clip-path; box-shadow: 0 30px 80px rgba(0,0,0,.5); }
 .ritual-fotos { position: absolute; inset: 0; will-change: transform; }
 .ritual-fotos img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
 .ritual-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-.ritual-painel { position: absolute; left: var(--e8); bottom: var(--e8); max-width: 34ch; }
+.ritual-painel { position: absolute; left: var(--sec-lado); bottom: var(--e8); max-width: 30ch; z-index: 1; }
 .ritual-frase { font: 500 var(--t-h3)/1.2 var(--f-titulo); font-variation-settings: "opsz" 36; transition: opacity .25s; }
 .ritual-legenda { position: absolute; left: 0; right: 0; bottom: calc(12vh - var(--e6)); text-align: center; font-size: var(--t-legenda); color: var(--areia); opacity: 0; }
 @media (max-width: 767px) {
   .com-movimento .ritual-trilha { height: 260vh; }
   .ritual-fotos img { object-position: 68% 60%; }
-  .ritual-painel { left: var(--e5); right: var(--e5); bottom: var(--e5); }
-  .ritual-legenda { bottom: calc(14svh - var(--e6)); }
+  .ritual-quadro { top: calc(64px + 2svh); transform: translateX(-50%); width: calc(100vw - 2 * var(--e5)); height: auto; aspect-ratio: 4 / 5; max-height: 64svh; }
+  .ritual-painel { left: var(--e5); right: var(--e5); bottom: auto; top: calc(64px + 2svh + min(64svh, (100vw - 48px) * 1.25) + 8px); background: none; padding: 0; }
+  .ritual-legenda { bottom: auto; top: calc(64px + 2svh + min(64svh, (100vw - 48px) * 1.25) - 20px); }
 }
 
 /* ---------- 5. Cardápio ---------- */
@@ -315,7 +317,7 @@ a:hover, a:focus-visible { text-decoration-thickness: 2px; }
 html.contraste { --noite: #000; --balcao: #000; --creme: #fff; --areia: #fff; --ambar: #FFD27A; --ambar-hover: #FFE2A6; --veu: rgba(0,0,0,.88); --fio: rgba(255,255,255,.5); }
 html.contraste .salao, html.contraste .ritual-fotos, html.contraste .cena { filter: brightness(.55); }
 html.legivel body, html.legivel h1, html.legivel h2, html.legivel h3, html.legivel .logo, html.legivel blockquote,
-html.legivel .chegada-fim-texto, html.legivel .ritual-frase, html.legivel .ritual-parado p, html.legivel .visite-dados dd { font-family: var(--f-texto) !important; font-style: normal !important; letter-spacing: .02em !important; }
+html.legivel .credito, html.legivel .frase, html.legivel .ritual-frase, html.legivel .ritual-parado p, html.legivel .visite-dados dd { font-family: var(--f-texto) !important; font-style: normal !important; letter-spacing: .02em !important; }
 html.legivel .nome-grande text { font-family: var(--f-texto); font-style: normal; }
 html.espaco body { line-height: 1.9; }
 html.espaco p, html.espaco li, html.espaco dd { line-height: 1.9 !important; word-spacing: .12em; }
@@ -334,5 +336,12 @@ html.links a, html.links button { outline: 2px dashed var(--ambar); outline-offs
 .declaracao p + p, .declaracao p + ul { margin-top: var(--e4); }
 .declaracao ul { padding-left: 1.2em; display: grid; gap: var(--e3); }
 
-/* Versão parada: véu no alto do salão para o título ficar legível */
-html:not(.com-movimento) .chegada-camadas::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(21,17,14,.82) 0%, rgba(21,17,14,.55) 38%, rgba(21,17,14,0) 62%); }
+
+/* Transição do hero para "Sem relógio": o salão escurece e o texto sobe do mesmo escuro */
+.com-movimento .sem-relogio-texto, .com-movimento .notas li, .com-movimento .fios { opacity: 0; transform: translateY(28px); transition: opacity 1s ease, transform 1.2s var(--sai); }
+.com-movimento .fios { transform: none; transition-delay: .6s; }
+.com-movimento .notas li:nth-child(1) { transition-delay: .25s; }
+.com-movimento .notas li:nth-child(2) { transition-delay: .4s; }
+.com-movimento .notas li:nth-child(3) { transition-delay: .55s; }
+.com-movimento .sem-relogio.visivel .sem-relogio-texto, .com-movimento .sem-relogio.visivel .notas li, .com-movimento .sem-relogio.visivel .fios { opacity: 1; transform: none; }
+.com-movimento .sem-relogio { padding-top: var(--e9); }

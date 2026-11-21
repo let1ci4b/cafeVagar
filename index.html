@@ -22,8 +22,6 @@
 <link rel="preload" href="assets/fontes/instrument-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="assets/img/chegada-salao-alto-754.webp" imagesrcset="assets/img/chegada-salao-alto-540.webp 540w, assets/img/chegada-salao-alto-754.webp 754w" imagesizes="max(100vw, 57vh)" media="(prefers-reduced-motion: reduce) and (max-aspect-ratio: 1/1)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/img/chegada-salao-1600.webp" imagesrcset="assets/img/chegada-salao-960.webp 960w, assets/img/chegada-salao-1600.webp 1600w, assets/img/chegada-salao-2400.webp 2400w" imagesizes="max(100vw, 180vh)" media="(prefers-reduced-motion: reduce) and (min-aspect-ratio: 1001/1000)" fetchpriority="high">
-<link rel="preload" as="image" href="assets/img/chegada-cena-alto-754.webp" imagesrcset="assets/img/chegada-cena-alto-540.webp 540w, assets/img/chegada-cena-alto-754.webp 754w" imagesizes="max(100vw, 57vh)" media="(prefers-reduced-motion: no-preference) and (max-aspect-ratio: 1/1)" fetchpriority="high">
-<link rel="preload" as="image" href="assets/img/chegada-cena-1600.webp" imagesrcset="assets/img/chegada-cena-960.webp 960w, assets/img/chegada-cena-1600.webp 1600w, assets/img/chegada-cena-2400.webp 2400w" imagesizes="max(100vw, 180vh)" media="(prefers-reduced-motion: no-preference) and (min-aspect-ratio: 1001/1000)" fetchpriority="high">
 <link rel="stylesheet" href="estilo.css">
 <script>document.documentElement.classList.add("js");</script>
 </head>
@@ -47,26 +45,30 @@
   <section class="chegada" id="topo" aria-labelledby="titulo-chegada">
     <div class="chegada-palco">
       <div class="chegada-camadas" aria-hidden="true">
-        <div class="cena"></div>
+        <div class="cena"><canvas class="cena-canvas"></canvas></div>
         <picture><source media="(max-aspect-ratio: 1/1)" srcset="assets/img/chegada-salao-alto-540.webp 540w, assets/img/chegada-salao-alto-754.webp 754w" sizes="max(100vw, 57vh)"><img class="salao" src="assets/img/chegada-salao-1600.webp" srcset="assets/img/chegada-salao-960.webp 960w, assets/img/chegada-salao-1600.webp 1600w, assets/img/chegada-salao-2400.webp 2400w" sizes="max(100vw, 180vh)" width="2400" height="1340" alt="" decoding="async"></picture>
+        <div class="vidro"></div>
+        <div class="vinheta"></div>
+        <div class="preto"></div>
         <div class="tarja tarja--cima"></div>
         <div class="tarja tarja--baixo"></div>
       </div>
-
-      <template id="modelo-cena">
-          <picture><source media="(max-aspect-ratio: 1/1)" srcset="assets/img/chegada-cena-alto-540.webp 540w, assets/img/chegada-cena-alto-754.webp 754w" sizes="max(100vw, 57vh)"><img class="cena-fundo" src="assets/img/chegada-cena-1600.webp" srcset="assets/img/chegada-cena-960.webp 960w, assets/img/chegada-cena-1600.webp 1600w, assets/img/chegada-cena-2400.webp 2400w" sizes="max(100vw, 180vh)" width="2400" height="1340" alt="" fetchpriority="high" decoding="async"></picture>
-          <picture><source media="(max-aspect-ratio: 1/1)" srcset="assets/img/chegada-fachada-alto-540.webp 540w, assets/img/chegada-fachada-alto-754.webp 754w" sizes="max(100vw, 57vh)"><img class="cena-fachada" src="assets/img/chegada-fachada-1600.webp" srcset="assets/img/chegada-fachada-960.webp 960w, assets/img/chegada-fachada-1600.webp 1600w, assets/img/chegada-fachada-2400.webp 2400w" sizes="max(100vw, 180vh)" width="2400" height="1340" alt="" decoding="async"></picture>
-      </template>
-      <p class="creditos"><span>Café Vagar apresenta</span><span>uma pausa ao fim da tarde</span></p>
-      <h1 id="titulo-chegada" class="chegada-titulo">
-        <span class="linha">O tempo passa.</span>
-        <em class="linha">O café fica.</em>
-      </h1>
-      <p class="dica" aria-hidden="true">role para entrar</p>
-      <div class="chegada-fim painel">
-        <p class="chegada-fim-texto">Entre sem pressa.</p>
-        <a class="botao" href="https://www.google.com/maps/search/?api=1&amp;query=Rua+das+Flores+128+Florian%C3%B3polis" target="_blank" rel="noopener">Como chegar<span class="oculto"> (abre em nova aba)</span></a>
+      <div class="falas">
+        <div class="fala fala--credito" data-de="0" data-ate="0.09">
+          <p class="credito">Café Vagar apresenta</p>
+        </div>
+        <div class="fala fala--credito" data-de="0.10" data-ate="0.19">
+          <p class="credito">uma pausa em cinco atos<span>Rua das Flores, 128, Florianópolis</span></p>
+        </div>
+        <div class="fala fala--titulo" data-de="0.57" data-ate="0.73">
+          <h1 id="titulo-chegada">O tempo passa.<br><em>O café fica.</em></h1>
+        </div>
+        <div class="fala fala--frase" data-de="0.75" data-ate="0.93">
+          <p class="frase">Há dias que pedem pressa.<br><em>Outros pedem café.</em></p>
+          <p><a class="botao" href="#sem-relogio">Entre sem pressa</a></p>
+        </div>
       </div>
+      <p class="dica" aria-hidden="true">role para entrar</p>
     </div>
   </section>
 
@@ -74,12 +76,11 @@
   <section class="sem-relogio secao" id="sem-relogio" tabindex="-1" aria-labelledby="titulo-sem-relogio">
     <div class="sem-relogio-grade">
       <div class="sem-relogio-texto">
-        <h2 id="titulo-sem-relogio">Há <span data-ancora="2">dias</span> que pedem <span data-ancora="3">pressa</span>. <em>Outros pedem <span data-ancora="1">café</span>.</em></h2>
-        <p>Não é só sobre tomar um café. É sobre encontrar um lugar onde você não precisa olhar para o relógio.</p>
+        <h2 id="titulo-sem-relogio">Não é só sobre tomar um <span data-ancora="1">café</span>. <em>É sobre encontrar um <span data-ancora="2">lugar</span> onde você não precisa olhar para o <span data-ancora="3">relógio</span>.</em></h2>
       </div>
       <ul class="notas">
         <li data-nota="1">O grão é moído na hora do pedido, nunca antes.</li>
-        <li data-nota="2">A mesa grande do fundo cabe oito.</li>
+        <li data-nota="2">A mesa do fundo cabe seis.</li>
         <li data-nota="3">Tem wi-fi, mas quase ninguém lembra de pedir a senha.</li>
       </ul>
     </div>
