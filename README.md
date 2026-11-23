@@ -131,7 +131,7 @@ Como não há build, o que você vê no computador é exatamente o que vai para 
 ## Créditos
 
 Design, código e conteúdo: **[Letícia Beatriz](https://github.com/let1ci4b)**, que faz sites simples e acessíveis para pequenos negócios.
-Fontes: Fraunces e Instrument Sans (SIL Open Font License). Imagens geradas com Google Gemini e vídeo do ritual com Veo, para esta demonstração.
+Fontes: Fraunces e Instrument Sans (SIL Open Font License). Imagens e vídeos geradas com Google Flow, para esta demonstração.
 
 <div align="center">
 <sub>Feito com cuidado para funcionar para todo mundo.</sub>
