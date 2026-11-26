@@ -1,17 +1,17 @@
 <div align="center">
 
-<img src="docs/capa.jpg" alt="Café Vagar: uma pequena cafeteria verde com a vitrine acesa numa rua de bairro ao entardecer." width="100%">
+<img src="docs/capa.jpg" alt="Café Vagar: xícara de café preto vista de cima numa mesa escura, ao lado da frase O tempo passa. O café fica." width="100%">
 
 # Café Vagar
 
-**Site cinematográfico de uma cafeteria de bairro, em que a rolagem atravessa a rua e entra no café**
+**Site cinematográfico de uma cafeteria de bairro, que abre com uma xícara-relógio: ao rolar, o tempo cai e o café fica**
 
 [**Ver o site**](https://cafevagar.pages.dev/) &nbsp;·&nbsp; [Declaração de acessibilidade](https://cafevagar.pages.dev/acessibilidade.html)
 
 ![Status](https://img.shields.io/badge/status-demonstrativo-E3A857?style=flat-square)
 ![WCAG 2.2 AA](https://img.shields.io/badge/WCAG_2.2-AA-15110E?style=flat-square)
 ![Acessibilidade](https://img.shields.io/badge/Lighthouse_acessibilidade-100-15110E?style=flat-square)
-![Desempenho](https://img.shields.io/badge/Lighthouse_desempenho-100-15110E?style=flat-square)
+![Desempenho](https://img.shields.io/badge/Lighthouse_desempenho-95-15110E?style=flat-square)
 ![HTML, CSS e JS](https://img.shields.io/badge/HTML_CSS_JS-sem_framework-9A5234?style=flat-square)
 
 </div>
@@ -22,7 +22,7 @@
 <br>
 
 <p align="center">
-  <img src="docs/vitrine.webp" alt="O site no computador e no celular: a fachada verde do Café Vagar, com a placa e a porta aberta mostrando o balcão aceso por dentro." width="100%">
+  <img src="docs/vitrine.webp" alt="O site no computador e no celular: no computador, a xícara de café vista de cima com o pires marcado como relógio, números de 1 a 12 em volta; no celular, a xícara e o título O tempo passa. O café fica." width="100%">
 </p>
 
 ## Sobre o projeto
@@ -32,12 +32,12 @@
 | **Cliente** | Café Vagar (fictício) |
 | **Tipo** | Site cinematográfico de página única |
 | **Público** | Quem procura um café de bairro para ficar sem pressa, sozinho ou com amigos |
-| **Versão** | 2 · novembro de 2026 |
+| **Versão** | 3 · novembro de 2026 |
 | **Feito por** | [Letícia Beatriz](https://github.com/let1ci4b) |
 
 ## Destaques
 
-- **Chegada de cinema.** A página começa no escuro, com os créditos. A rua aparece e a rolagem caminha até a porta, com perspectiva de verdade: a calçada passa por baixo e as casas vizinhas saem pelas laterais. Ao atravessar a porta vem um clarão quente e o salão entra em foco.
+- **Xícara-relógio na abertura.** A página começa no escuro, com os créditos. Surge uma xícara de café vista de cima, com o pires marcado como um relógio. Ao rolar, os ponteiros correm, os números caem um a um, os ponteiros afundam no café deixando ondinhas, e fica só o café: "O tempo passa. O café fica." A foto é uma imagem só; o relógio é desenho em código por cima, alinhado ao pires, nítido em qualquer tela.
 - **O ritual em vídeo.** A rolagem "toca" o leite sendo servido até formar o coração na xícara, com um relógio marcando 00:00, 00:20 e 00:45.
 - **Tira de filme.** Três fotos do salão deslizam de lado com a rolagem, e uma régua marca cada momento.
 - **Cardápio com foto que acompanha o olhar.** No computador, a foto do item segue o mouse numa coluna ao lado da lista, sem cobrir o texto. No celular, cada item tem uma miniatura.
@@ -62,18 +62,18 @@
 |---|---|
 | Acessibilidade automática (axe-core, WCAG 2.2 AA), em 360, 390 e 1440 px, com e sem movimento reduzido | 0 violações |
 | Validador de HTML (html-validate e validador do W3C) | 0 erros |
-| Lighthouse no celular | Desempenho 100 · Acessibilidade 100 · Boas práticas 100 |
-| Peso da primeira tela | cerca de 0,5 MB. A caminhada (2,2 MB no celular, 5,2 MB no computador) e o vídeo do ritual carregam aos poucos, depois |
+| Lighthouse no celular (medido no computador de testes, que oscila) | Desempenho 93 a 96 · Acessibilidade 100 · Boas práticas 100 |
+| Peso da primeira tela | cerca de 0,4 MB (a foto da abertura tem 70 KB). O vídeo do ritual carrega aos poucos, depois |
 | Texto aumentado para 160% no celular | sem rolagem para o lado |
 | Teclado e leitor de tela | tudo funciona sem mouse, com foco visível e link para pular a abertura |
-| Movimento reduzido | página parada e completa, sem baixar a caminhada nem o vídeo |
+| Movimento reduzido | página parada e completa, sem o relógio e sem baixar o vídeo |
 
 ## Tecnologias
 
 | | |
 |---|---|
 | **Base** | HTML, CSS e JavaScript puros, sem framework e sem build |
-| **Animações** | código próprio: sequências de quadros num `<canvas>` conduzidas pela rolagem |
+| **Animações** | código próprio: o relógio da abertura em SVG e o vídeo do ritual em quadros num `<canvas>`, conduzidos pela rolagem |
 | **Conteúdo** | direto no `index.html` |
 | **Hospedagem** | [Cloudflare Pages](https://pages.cloudflare.com), publicado a cada envio para a branch `main` |
 | **Métricas** | Cloudflare Web Analytics, sem cookies |
@@ -99,7 +99,7 @@ Como não há build, o que você vê no computador é exatamente o que vai para 
 | Textos, cardápio, preços, endereço e horários | `index.html` |
 | Cores e fontes | `estilo.css` (bloco `:root`) |
 | Fotos do salão, do cardápio e da seção "Quem fica" | `assets/img/` |
-| Caminhada da abertura (90 quadros, computador e celular) | `assets/chegada/` |
+| Foto da abertura | `assets/img/abertura-cafe-2000.webp` (o relógio é o `svg.xicara` no `index.html`, alinhado ao pires da foto) |
 | Vídeo do ritual (120 quadros, computador e celular) | `assets/ritual/` |
 | Momentos da abertura e das falas | `app.js` (função `desenharChegada`) e os `data-de` / `data-ate` no `index.html` |
 | Texto e imagem do card de compartilhamento | `index.html` (`og:`) e `assets/img/compartilhar.jpg` (1200 × 630) |
@@ -114,7 +114,6 @@ Como não há build, o que você vê no computador é exatamente o que vai para 
 ├── estilo.css                        cores, fontes e layout
 ├── app.js                            movimento, menu de acessibilidade e cardápio
 ├── assets/
-│   ├── chegada/      quadros da caminhada até o café
 │   ├── ritual/       quadros do vídeo do leite sendo servido
 │   ├── img/          fotos e card de compartilhamento
 │   ├── fontes/       Fraunces e Instrument Sans
@@ -126,12 +125,12 @@ Como não há build, o que você vê no computador é exatamente o que vai para 
 ## Publicar
 
 - **Cloudflare Pages (oficial):** cada envio para a branch `main` publica o site em https://cafevagar.pages.dev/. Configuração: sem comando de build, pasta de saída `/` (a raiz).
-- **Versão anterior:** a primeira versão, com fotos de banco de imagens, está guardada no branch [`versao-1-pexels`](https://github.com/let1ci4b/cafeVagar/tree/versao-1-pexels).
+- **Versões anteriores:** a primeira, com fotos de banco de imagens, está no branch [`versao-1-pexels`](https://github.com/let1ci4b/cafeVagar/tree/versao-1-pexels). A segunda, com a caminhada pela rua até a porta, está no branch [`versao-2-caminhada`](https://github.com/let1ci4b/cafeVagar/tree/versao-2-caminhada).
 
 ## Créditos
 
 Design, código e conteúdo: **[Letícia Beatriz](https://github.com/let1ci4b)**, que faz sites simples e acessíveis para pequenos negócios.
-Fontes: Fraunces e Instrument Sans (SIL Open Font License). Imagens e vídeos geradas com Google Flow, para esta demonstração.
+Fontes: Fraunces e Instrument Sans (SIL Open Font License). Imagens e vídeos gerados por IA (Google Flow e Gemini), para esta demonstração.
 
 <div align="center">
 <sub>Feito com cuidado para funcionar para todo mundo.</sub>

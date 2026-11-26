@@ -106,15 +106,36 @@ a:hover, a:focus-visible { text-decoration-thickness: 2px; }
 /* ---------- 1. Chegada ---------- */
 .chegada { position: relative; }
 .chegada-palco { position: relative; height: 100svh; overflow: hidden; }
-.chegada-camadas, .cena, .salao, .tarja, .vidro, .vinheta { position: absolute; }
+.chegada-camadas, .cena, .tarja, .vinheta, .grao { position: absolute; }
 .chegada-camadas { inset: 0; }
 .cena { inset: 0; }
-.cena-canvas { position: absolute; inset: 0; width: 100%; height: 100%; will-change: filter, opacity; }
-.chegada-camadas picture { display: contents; }
-.salao { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
-/* o clarão quente da vitrine ao atravessar o vidro */
-.vidro { inset: 0; opacity: 0; pointer-events: none; mix-blend-mode: screen;
-  background: radial-gradient(40% 45% at 50% 58%, rgba(255,214,150,.95), rgba(214,150,80,.55) 45%, rgba(40,26,12,0) 80%); }
+/* A xícara-relógio: foto de uma xícara vista de cima (imagem gerada por IA, site demonstrativo); o relógio
+   (marcas, números e ponteiros) é SVG por cima, alinhado ao pires. Ao rolar, os números caem, os ponteiros
+   afundam no café e deixam ondinhas; o café preto fica ("O tempo passa. O café fica."). O leite fica para o Ritual. */
+.cena--xicara { background: var(--noite); }
+.xicara {
+  position: absolute; left: 50%; top: 50%; width: min(92vmin, 880px); height: auto; aspect-ratio: 1; overflow: visible;
+  transform: translate(-50%, -50%) translate(var(--xx, 0px), var(--xy, 0px)) scale(var(--xs, 1));
+}
+.x-vapor { transform-box: view-box; transform-origin: 0 0; }
+.com-movimento .x-vapor { animation: vapor 7s ease-in-out infinite alternate; }
+@keyframes vapor { from { transform: translate(-10px, 10px) rotate(-4deg); opacity: .6; } to { transform: translate(12px, -18px) rotate(5deg); opacity: 1; } }
+.x-marcas line { stroke: var(--terracota); stroke-opacity: .5; stroke-width: 2; }
+.x-marcas line.h { stroke-width: 5; stroke-opacity: .8; }
+.x-numeros text { font: italic 300 68px/1 var(--f-titulo); font-variation-settings: "opsz" 144; fill: var(--creme); text-anchor: middle; dominant-baseline: central; }
+.x-ponteiros line, .x-ponteiros { transform-box: view-box; transform-origin: 0 0; }
+.x-numeros text { transform-box: fill-box; transform-origin: 50% 50%; }
+/* grão de papel por cima de tudo, para tirar a cara de "desenho de computador" */
+.grao { inset: 0; pointer-events: none; opacity: .1; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.2 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"); }
+/* versão parada: a xícara já pronta, com o coração, ao lado do título */
+.x-onda { opacity: 0; }
+html:not(.com-movimento) .x-numeros, html:not(.com-movimento) .x-ponteiros, html:not(.com-movimento) .x-marcas, html:not(.com-movimento) .x-ondas { display: none; }
+html:not(.com-movimento) .xicara { --xx: 20vw; --xs: .82; }
+@media (max-aspect-ratio: 1/1) {
+  .xicara { width: min(106vmin, 880px); }
+  html:not(.com-movimento) .xicara { --xx: 0px; --xy: -2svh; --xs: .5; }
+}
 .preto { position: absolute; inset: 0; background: var(--noite); display: none; }
 .com-movimento .preto { display: block; }
 .vinheta { inset: 0; pointer-events: none;
@@ -143,17 +164,15 @@ a:hover, a:focus-visible { text-decoration-thickness: 2px; }
 @keyframes desce { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 
 /* Versão parada (sem JS, movimento reduzido ou "Parar animações"): só o salão, com o título e a frase. */
-.cena, .tarja, .dica, .vidro, .fala--credito { display: none; }
-html:not(.com-movimento) .chegada-camadas::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(21,17,14,.82) 0%, rgba(21,17,14,.5) 40%, rgba(21,17,14,.1) 60%, rgba(21,17,14,.75) 100%); }
+.tarja, .dica, .fala--credito { display: none; }
 html:not(.com-movimento) .fala { opacity: 1; transform: none; pointer-events: auto; transition: none; }
 html:not(.com-movimento) .fala--titulo { top: calc(64px + 6svh); bottom: auto; }
 
 /* Versão com movimento */
 .com-movimento .chegada { height: 420svh; }
 .com-movimento .chegada-palco { position: sticky; top: 0; }
-.com-movimento .cena, .com-movimento .tarja, .com-movimento .dica, .com-movimento .vidro { display: block; }
+.com-movimento .cena, .com-movimento .tarja, .com-movimento .dica { display: block; }
 .com-movimento .fala--credito { display: block; }
-.com-movimento .salao { opacity: 0; will-change: opacity, transform, filter; }
 @media (max-width: 767px) {
   .com-movimento .chegada { height: 340svh; }
   .fala { left: var(--e5); right: var(--e5); }

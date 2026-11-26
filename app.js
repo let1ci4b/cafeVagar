@@ -63,13 +63,24 @@
   const topo = document.getElementById("cabecalho");
   const chegada = document.getElementById("topo");
   const cena = chegada.querySelector(".cena");
-  const salao = chegada.querySelector(".salao");
   const tarjas = chegada.querySelectorAll(".tarja");
-  const vidro = chegada.querySelector(".vidro");
   const preto = chegada.querySelector(".preto");
   const falas = [...chegada.querySelectorAll(".fala")];
   const dica = chegada.querySelector(".dica");
-  const canvasChegada = cena.querySelector(".cena-canvas");
+  const xicara = cena.querySelector(".xicara");
+  const xNumeros = [...xicara.querySelectorAll(".x-numeros text")];
+  const xMarcas = xicara.querySelector(".x-marcas");
+  const xPonteiros = xicara.querySelector(".x-ponteiros");
+  const xHora = xicara.querySelector(".x-hora");
+  const xMinuto = xicara.querySelector(".x-minuto");
+  const xOndas = [...xicara.querySelectorAll(".x-onda")];
+  const emPe = matchMedia("(max-aspect-ratio: 1/1)");
+  // ordem em que os números caem (fixa, para ser sempre igual) e um jeito de cair para cada um
+  const ordemQueda = [7, 2, 10, 5, 12, 1, 8, 4, 11, 3, 9, 6];
+  const queda = xNumeros.map((_, i) => {
+    const k = ordemQueda.indexOf(i + 1);
+    return { ini: 0.29 + k * 0.011, giro: (k % 2 ? 1 : -1) * (40 + ((k * 37) % 70)), lado: ((k * 53) % 60) - 30 };
+  });
 
   const lugarTrilha = document.querySelector(".lugar-trilha");
   const lugarFaixa = document.querySelector(".lugar-faixa");
@@ -125,7 +136,6 @@
     }
     return { carregar, desenhar, invalidar: () => { desenhado = -1; } };
   }
-  const seqChegada = criarSequencia(canvasChegada, "assets/chegada", 90, { a: [0.5, 0.5], l: [0.5, 0.52] });
   const seqRitual = criarSequencia(ritualFotos.querySelector(".ritual-canvas"), "assets/ritual", 120, { a: [0.62, 0.6], l: [0.5, 0.6] });
   const ritualPainel = document.querySelector(".ritual-painel");
   const ritualTempo = document.querySelector(".ritual-tempo");
@@ -146,15 +156,15 @@
     movimento = quer;
     raiz.classList.toggle("com-movimento", quer);
     raiz.classList.toggle("parado", !quer);
-    if (quer) seqChegada.carregar();
     limparEstilos();
     trilhas.forEach((t) => { t.atual = -1; });
     pedirQuadro();
   }
   function limparEstilos() {
-    for (const el of [preto, vidro, salao, dica, canvasChegada, lugarFaixa, reguaLinha, ritualFotos, ritualQuadro, ritualPainel, ritualLegenda, ...tarjas]) {
-      if (el) { el.style.transform = ""; el.style.opacity = ""; el.style.clipPath = ""; el.style.visibility = ""; el.style.filter = ""; }
+    for (const el of [preto, dica, xicara, xMarcas, xPonteiros, ...xOndas, ...xNumeros, lugarFaixa, reguaLinha, ritualFotos, ritualQuadro, ritualPainel, ritualLegenda, ...tarjas]) {
+      if (el) { el.style.transform = ""; el.style.opacity = ""; el.style.clipPath = ""; el.style.visibility = ""; el.style.filter = ""; el.style.strokeDashoffset = ""; }
     }
+    xOndas.forEach((o) => { o.setAttribute("r", 10); o.style.opacity = ""; });
     falas.forEach((f) => f.classList.remove("ativa"));
   }
 
@@ -166,22 +176,46 @@
     return total > 0 ? limita(-r.top / total) : 0;
   }
 
-  // A chegada (como no Café Vagar antigo): a rua surge do escuro, a câmera caminha até a
-  // vitrine, a luz quente do vidro toma a tela num clarão e o salão entra em foco.
+  // A chegada, a xícara-relógio: começa no preto com os créditos; a xícara de café preto surge
+  // sobre a mesa, com o pires marcado como relógio e os ponteiros girando no café. Os números
+  // caem um a um, os ponteiros afundam e o café fica. Aí vêm os títulos.
   const suave = (t) => t * t * (3 - 2 * t);
   function desenharChegada(p) {
-    // começa no preto, com os créditos; a rua surge escura e vai clareando
-    preto.style.opacity = Math.max(1 - ease.sineInOut(faixa(p, 0.16, 0.28)), ease.sineInOut(faixa(p, 0.88, 0.99))).toFixed(3);  // no fim, o salão escurece até a cor da página: a próxima seção nasce do mesmo escuro
-    seqChegada.desenhar(Math.round(faixa(p, 0.20, 0.50) * 89));
-    const brilho = 0.35 + 0.65 * faixa(p, 0.18, 0.34);
-    const desfoque = faixa(p, 0.44, 0.52) * 8;
-    canvasChegada.style.filter = `brightness(${brilho.toFixed(2)})` + (desfoque > 0.2 ? ` blur(${desfoque.toFixed(1)}px)` : "");
-    canvasChegada.style.opacity = (1 - faixa(p, 0.48, 0.54)).toFixed(3);
-    vidro.style.opacity = (faixa(p, 0.40, 0.50) * (1 - faixa(p, 0.51, 0.58))).toFixed(3);
-    const entra = faixa(p, 0.47, 0.57);
-    salao.style.opacity = entra.toFixed(3);
-    salao.style.transform = `scale(${(1.15 - 0.15 * suave(entra) + 0.06 * suave(faixa(p, 0.57, 1))).toFixed(4)})`;
-    salao.style.filter = entra < 1 ? `blur(${((1 - entra) * 8).toFixed(1)}px)` : "";
+    preto.style.opacity = Math.max(1 - ease.sineInOut(faixa(p, 0.16, 0.28)), ease.sineInOut(faixa(p, 0.9, 0.995))).toFixed(3);
+    // posição da xícara: no centro; quando o título entra, vai para a direita (deitado) ou sobe (em pé)
+    const lado = ease.sineInOut(faixa(p, 0.54, 0.68));
+    const entra = suave(faixa(p, 0.18, 0.5));
+    if (emPe.matches) {
+      xicara.style.setProperty("--xx", "0px");
+      xicara.style.setProperty("--xy", `${(-17 * lado).toFixed(2)}svh`);
+      xicara.style.setProperty("--xs", (0.9 + 0.1 * entra - 0.24 * lado).toFixed(3));
+    } else {
+      xicara.style.setProperty("--xx", `${(21 * lado).toFixed(2)}vw`);
+      xicara.style.setProperty("--xy", "0px");
+      xicara.style.setProperty("--xs", (0.86 + 0.14 * entra - 0.1 * lado).toFixed(3));
+    }
+    // ponteiros: o tempo corre rápido (duas voltas do minuto) e depois afunda no café
+    const corre = ease.sineInOut(faixa(p, 0.2, 0.46));
+    const minuto = 30 + corre * 720;
+    xMinuto.style.transform = `rotate(${minuto.toFixed(1)}deg)`;
+    xHora.style.transform = `rotate(${(242 + minuto / 12).toFixed(1)}deg)`;
+    const afunda = faixa(p, 0.42, 0.52);
+    xPonteiros.style.opacity = (1 - afunda).toFixed(3);
+    xPonteiros.style.transform = `scale(${(1 - 0.35 * afunda).toFixed(3)})`;
+    // números: cada um se solta da borda e cai para fora da tela, girando
+    queda.forEach((q, i) => {
+      const t = faixa(p, q.ini, q.ini + 0.12);
+      const g = t * t; // começa devagar e acelera, como coisa que cai
+      xNumeros[i].style.transform = `translate(${(q.lado * t).toFixed(1)}px, ${(1100 * g).toFixed(1)}px) rotate(${(q.giro * t).toFixed(1)}deg)`;
+      xNumeros[i].style.opacity = (1 - faixa(t, 0.7, 1)).toFixed(3);
+    });
+    xMarcas.style.opacity = (1 - faixa(p, 0.36, 0.5)).toFixed(3);
+    // onde os ponteiros afundam, duas ondinhas se abrem no café e somem
+    xOndas.forEach((o, i) => {
+      const t = faixa(p, 0.47 + i * 0.03, 0.6 + i * 0.03);
+      o.setAttribute("r", (10 + 170 * ease.expoOut(t)).toFixed(1));
+      o.style.opacity = (t > 0 && t < 1 ? 0.45 * (1 - t) : 0).toFixed(3);
+    });
     const a = suave(faixa(p, 0.24, 0.40));
     tarjas[0].style.transform = `translateY(${(-100 * a).toFixed(1)}%)`;
     tarjas[1].style.transform = `translateY(${(100 * a).toFixed(1)}%)`;
@@ -345,7 +379,7 @@
   let tempoResize = 0;
   addEventListener("resize", () => {
     clearTimeout(tempoResize);
-    tempoResize = setTimeout(() => { trilhas.forEach((t) => { t.ultimo = -1; }); seqRitual.invalidar(); seqChegada.invalidar(); desenharFios(); prepararCardapio(); pedirQuadro(); }, 120);
+    tempoResize = setTimeout(() => { trilhas.forEach((t) => { t.ultimo = -1; }); seqRitual.invalidar(); desenharFios(); prepararCardapio(); pedirQuadro(); }, 120);
   });
   reduzirSistema.addEventListener("change", atualizarMovimento);
   document.fonts && document.fonts.ready.then(desenharFios);
