@@ -6,7 +6,7 @@
 
 **Site cinematográfico de uma cafeteria de bairro, que abre com uma xícara-relógio: ao rolar, o tempo cai e o café fica**
 
-[**Ver o site**](https://cafevagar.pages.dev/) &nbsp;·&nbsp; [Declaração de acessibilidade](https://cafevagar.pages.dev/acessibilidade.html)
+[**Ver o site**](https://cafevagar.pages.dev/) &nbsp;·&nbsp; [Declaração de acessibilidade](https://cafevagar.pages.dev/acessibilidade.html) &nbsp;·&nbsp; [Privacidade](https://cafevagar.pages.dev/privacidade.html)
 
 ![Status](https://img.shields.io/badge/status-demonstrativo-E3A857?style=flat-square)
 ![WCAG 2.2 AA](https://img.shields.io/badge/WCAG_2.2-AA-15110E?style=flat-square)
@@ -105,12 +105,14 @@ Como não há build, o que você vê no computador é exatamente o que vai para 
 | Texto e imagem do card de compartilhamento | `index.html` (`og:`) e `assets/img/compartilhar.jpg` (1200 × 630) |
 | Ícones do site (favicon) | `assets/icone/` |
 | Declaração de acessibilidade | `acessibilidade.html` |
+| Privacidade | `privacidade.html` |
+| Rodapé (igual nas 3 páginas: mudou um, muda os três) | `index.html`, `acessibilidade.html`, `privacidade.html` (`<footer class="rodape">`) |
 | Aparecer ou não no Google | `index.html` (`meta robots`) e `robots.txt` |
 
 ## Estrutura
 
 ```
-├── index.html, acessibilidade.html   páginas
+├── index.html, acessibilidade.html, privacidade.html   páginas
 ├── estilo.css                        cores, fontes e layout
 ├── app.js                            movimento, menu de acessibilidade e cardápio
 ├── assets/

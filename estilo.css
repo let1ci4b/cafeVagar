@@ -302,10 +302,27 @@ html:not(.com-movimento) .fala--titulo { top: calc(64px + 6svh); bottom: auto; }
 @media (min-width: 768px) { .visite-dados { grid-template-columns: repeat(2, minmax(0, 32ch)); gap: var(--e8); } }
 .nome-grande { display: block; width: 100%; height: auto; margin-top: var(--e9); }
 .nome-grande text { font: italic 300 150px var(--f-titulo); fill: var(--creme); opacity: .9; }
-.rodape { padding: var(--e7) var(--sec-lado) calc(var(--e7) + 72px); font-size: var(--t-legenda); line-height: 1.5; color: var(--areia); border-top: 1px solid var(--fio); display: grid; gap: var(--e4); }
-.rodape > * { max-width: 72ch; }
-.rodape strong { color: var(--creme); font-weight: 600; }
-.rodape-autora { display: flex; flex-wrap: wrap; align-items: center; gap: var(--e4); }
+/* Rodapé: padrão de todo site (claude/padrao-rodape.md) */
+.rodape { background: var(--balcao); color: var(--creme); padding: var(--e8) var(--sec-lado) 96px; border-top: 1px solid var(--fio); }
+.rodape > * { max-width: var(--max); margin-inline: auto; }
+.rodape a:not(.botao) { color: var(--creme); }
+.rodape :focus-visible { outline-color: var(--creme); }
+.rodape-marca { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: var(--e7); padding-bottom: var(--e8); border-bottom: 1px solid var(--fio); }
+.rodape-logo { font: italic 300 clamp(3rem, 2rem + 5vw, 6.5rem)/.95 var(--f-titulo); letter-spacing: -0.02em; font-variation-settings: "opsz" 144; }
+.rodape-chamada { display: grid; gap: var(--e5); justify-items: start; }
+.rodape-frase { font: 300 var(--t-h3)/1.25 var(--f-titulo); font-variation-settings: "opsz" 36; }
+.rodape-info { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--e7); padding: var(--e7) 0; }
+.rodape-titulo { font: 600 .8125rem/1.4 var(--f-texto); letter-spacing: .08em; text-transform: uppercase; margin-bottom: var(--e4); color: var(--areia); }
+.rodape-info ul { list-style: none; margin: 0; padding: 0; }
+.rodape-info address { font-style: normal; }
+.rodape-info p, .rodape-info address { margin-bottom: var(--e2); }
+.rodape-info a, .rodape-final a { display: inline-block; padding: 10px 0; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 85% / 0 1px no-repeat; transition: background-size .3s; }
+.rodape-info a:hover, .rodape-info a:focus-visible, .rodape-final a:hover, .rodape-final a:focus-visible { background-size: 100% 1px; }
+.rodape-final { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--e5); align-items: center; padding-top: var(--e5); border-top: 1px solid var(--fio); font-size: var(--t-legenda); }
+.rodape-demo { color: var(--areia); margin-top: var(--e1); max-width: 72ch; }
+html.links .rodape-info a, html.links .rodape-final a { text-decoration: underline; }
+@media (max-width: 1023px) { .rodape-info { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 767px) { .rodape-marca, .rodape-info, .rodape-final { grid-template-columns: 1fr; } .rodape-chamada .botao { width: 100%; } }
 
 /* ---------- Menu de acessibilidade ---------- */
 .acess { position: fixed; right: var(--e5); bottom: var(--e5); z-index: 50; font-family: var(--f-texto); }
@@ -335,7 +352,7 @@ html:not(.com-movimento) .fala--titulo { top: calc(64px + 6svh); bottom: auto; }
 /* Preferências do menu */
 html.contraste { --noite: #000; --balcao: #000; --creme: #fff; --areia: #fff; --ambar: #FFD27A; --ambar-hover: #FFE2A6; --veu: rgba(0,0,0,.88); --fio: rgba(255,255,255,.5); }
 html.contraste .salao, html.contraste .ritual-fotos, html.contraste .cena { filter: brightness(.55); }
-html.legivel body, html.legivel h1, html.legivel h2, html.legivel h3, html.legivel .logo, html.legivel blockquote,
+html.legivel body, html.legivel h1, html.legivel h2, html.legivel h3, html.legivel .logo, html.legivel .rodape-logo, html.legivel .rodape-frase, html.legivel blockquote,
 html.legivel .credito, html.legivel .frase, html.legivel .ritual-frase, html.legivel .ritual-parado p, html.legivel .visite-dados dd { font-family: var(--f-texto) !important; font-style: normal !important; letter-spacing: .02em !important; }
 html.legivel .nome-grande text { font-family: var(--f-texto); font-style: normal; }
 html.espaco body { line-height: 1.9; }

@@ -3,6 +3,8 @@
 // a página fica completa e parada. O movimento só liga com a classe "com-movimento".
 (() => {
   "use strict";
+  // rodapé: o ano se atualiza sozinho (o HTML traz o ano como reserva)
+  document.querySelectorAll(".js-ano").forEach((e) => { e.textContent = new Date().getFullYear(); });
   const raiz = document.documentElement;
   const reduzirSistema = matchMedia("(prefers-reduced-motion: reduce)");
   const largo = matchMedia("(min-width: 768px)");
