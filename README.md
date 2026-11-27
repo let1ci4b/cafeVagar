@@ -65,7 +65,7 @@
 | Lighthouse no celular (medido no computador de testes, que oscila) | Desempenho 93 a 96 · Acessibilidade 100 · Boas práticas 100 |
 | Peso da primeira tela | cerca de 0,4 MB (a foto da abertura tem 70 KB). O vídeo do ritual carrega aos poucos, depois |
 | Texto aumentado para 160% no celular | sem rolagem para o lado |
-| Teclado e leitor de tela | tudo funciona sem mouse, com foco visível e link para pular a abertura |
+| Teclado | tudo funciona sem mouse, com foco visível e link para pular a abertura |
 | Movimento reduzido | página parada e completa, sem o relógio e sem baixar o vídeo |
 
 ## Tecnologias
